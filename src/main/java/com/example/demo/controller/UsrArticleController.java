@@ -36,8 +36,22 @@ public class UsrArticleController {
 		return articles;
 	}
 	
+	@RequestMapping("/usr/article/getArticle")
+	@ResponseBody
+	public Object getArticleAction(int id) {
+		Article article = getArticle(id);
+		
+		if(article == null) {
+			return id + "번 게시물은 존재하지 않습니다.";
+		}
+		
+		//return 값이 String 일수도 있고 Object 일 수도 있어서 모든 것을 통칭하는 Object 리턴 자료형으로 설정
+		
+		return article;
+	}
+	
 	private void makeTestData() {
-		for( int i = 0; i < 10; i++ ) {
+		for( int i = 1; i <= 10; i++ ) {
 			
 			String title = "제목" + i;
 			String body = "내용" + i;
