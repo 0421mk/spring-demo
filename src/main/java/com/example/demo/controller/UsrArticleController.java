@@ -15,9 +15,12 @@ import lombok.Data;
 
 @Controller
 public class UsrArticleController {
+	//인스턴스 변수 시작
 	private int articleLastId;
 	private List<Article> articles;
+	//인스턴스 변수 종료
 	
+	//생성자
 	public UsrArticleController() {
 		articleLastId = 0;
 		articles = new ArrayList<>();
@@ -25,24 +28,12 @@ public class UsrArticleController {
 		makeTestData();
 	}
 	
-	@RequestMapping("/usr/article/doAdd")
-	@ResponseBody
-	public Article doAdd(String title, String body) {		
-		return writeArticle(title, body);;
-	}
-	
+	//서비스 메서드 시작
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public List<Article> getArticles() {
 		
 		return articles;
-	}
-	
-	@RequestMapping("/usr/article/doDelete")
-	@ResponseBody
-	public String doDelete(int id) {
-		
-		return id + "번 게시물을 삭제하였습니다.";
 	}
 	
 	private void makeTestData() {
@@ -56,7 +47,7 @@ public class UsrArticleController {
 		}
 	}
 	
-	public Article writeArticle(String title, String body) {
+	private Article writeArticle(String title, String body) {
 		int id = articleLastId + 1;
 		Article article = new Article(id, title, body);
 		
@@ -65,5 +56,45 @@ public class UsrArticleController {
 		
 		return article;
 	}
+	
+	private Article getArticle(int id) {
+		for (Article article : articles) {
+			if (article.getId() == id) {
+				return article;
+			}
+		}
+		
+		return null;
+	}
+	
+	private void deleteArticle(int id) {
+		Article article = getArticle(id);
+		
+		articles.remove(article);
+	}
+	//서비스 메서드 종료
+	
+	//액션 메서드 시작
+	@RequestMapping("/usr/article/doAdd")
+	@ResponseBody
+	private Article doAdd(String title, String body) {		
+		return writeArticle(title, body);
+	}
+	
+	@RequestMapping("/usr/article/doDelete")
+	@ResponseBody
+	private String doDelete(int id) {
+		Article article = getArticle(id);
+		
+		if (article == null) {
+			return id + "번 게시물이 존재하지 않습니다.";
+		}
+		
+		deleteArticle(id);
+		
+		return id + "번 게시물을 삭제하였습니다.";
+	}
+	//액션 메서드 종료
+
 	
 }
