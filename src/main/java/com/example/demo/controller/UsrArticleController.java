@@ -57,7 +57,7 @@ public class UsrArticleController {
 	@ResponseBody
 	private List<Article> getArticles() {
 
-		return articleService.articles;
+		return articleService.getArticles();
 	}
 
 	@RequestMapping("/usr/article/getArticle")
