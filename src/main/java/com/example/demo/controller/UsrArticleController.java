@@ -1,21 +1,23 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.service.ArticleService;
 import com.example.demo.vo.Article;
-
-import lombok.Data;
 
 @Controller
 public class UsrArticleController {
 	//인스턴스 변수 시작
+	//@Autowired시 생성자에 articleService = new ArticleService(); 안해도됨
+	//서비스나 Dao, Dto만 달아야 한다.
+	@Autowired
+	private ArticleService articleService;
 	private int articleLastId;
 	private List<Article> articles;
 	//인스턴스 변수 종료
