@@ -32,4 +32,7 @@ public interface MemberRepository {
 	@Select("SELECT * FROM `member` AS M WHERE M.loginId = #{loginId}")
 	public Member getMemberByLoginId(@Param("loginId") String loginId);
 
+	@Select("SELECT * FROM `member` AS M WHERE M.email = #{email}")
+	public Member getMemberByEmail(@Param("email") String email);
+
 }

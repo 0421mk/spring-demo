@@ -20,6 +20,12 @@ public class MemberService {
 			return -1;
 		}
 		
+		member = memberRepository.getMemberByEmail(email);
+		
+		if (member != null) {
+			return -2;
+		}
+		
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 		return memberRepository.getLastIndexId();
 	}
