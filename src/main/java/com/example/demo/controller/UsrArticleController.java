@@ -24,8 +24,11 @@ public class UsrArticleController {
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	private void doAdd(String title, String body) {
+	private String doAdd(String title, String body) {
 		articleService.writeArticle(title, body);
+		int id = articleService.getLastIndexId();
+		
+		return id + "번 게시물을 작성하였습니다.";
 	}
 
 	@RequestMapping("/usr/article/doDelete")
