@@ -24,8 +24,8 @@ public class UsrArticleController {
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	private Article doAdd(String title, String body) {
-		return articleService.writeArticle(title, body);
+	private void doAdd(String title, String body) {
+		articleService.writeArticle(title, body);
 	}
 
 	@RequestMapping("/usr/article/doDelete")
