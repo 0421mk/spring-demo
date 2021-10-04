@@ -16,7 +16,6 @@ public class ArticleService {
 	
 	public ArticleService(ArticleRepository articleRepository) {
 		this.articleRepository = articleRepository;
-		articleRepository.makeTestData();
 	}
 
 	public Article writeArticle(String title, String body) {
@@ -36,6 +35,6 @@ public class ArticleService {
 	}
 
 	public List<Article> getArticles() {
-		return articleRepository.articles;
+		return articleRepository.getArticles();
 	}
 }
