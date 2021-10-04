@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemberService;
+import com.example.demo.util.Util;
 import com.example.demo.vo.Member;
 
 @Controller
@@ -18,27 +19,27 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
-		if (loginId == null) {
+		if (Util.empty(loginId)) {
 			return "loginId(을)를 입력해주세요.";
 		}
 
-		if (loginPw == null) {
+		if (Util.empty(loginPw)) {
 			return "loginPw(을)를 입력해주세요.";
 		}
 
-		if (name == null) {
+		if (Util.empty(name)) {
 			return "name(을)를 입력해주세요.";
 		}
 
-		if (nickname == null) {
+		if (Util.empty(nickname)) {
 			return "nickname(을)를 입력해주세요.";
 		}
 
-		if (cellphoneNo == null) {
+		if (Util.empty(cellphoneNo)) {
 			return "cellphoneNo(을)를 입력해주세요.";
 		}
 
-		if (email == null) {
+		if (Util.empty(email)) {
 			return "email(을)를 입력해주세요.";
 		}
 		
