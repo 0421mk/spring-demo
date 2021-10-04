@@ -15,8 +15,11 @@ import com.example.demo.vo.Article;
 public class UsrArticleController {
 	// @Autowired시 생성자에 articleService = new ArticleService(); 안해도됨
 	// 서비스나 Dao, Dto만 달아야 한다.
-	@Autowired
 	private ArticleService articleService;
+	
+	private UsrArticleController(ArticleService articleService) {
+		this.articleService = articleService;
+	}
 
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
