@@ -14,6 +14,12 @@ public class MemberService {
 	}
 
 	public int join(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
+		Member member = memberRepository.getMemberByLoginId(loginId);
+		
+		if (member != null) {
+			return -1;
+		}
+		
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 		return memberRepository.getLastIndexId();
 	}

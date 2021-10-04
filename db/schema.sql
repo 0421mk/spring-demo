@@ -1,9 +1,10 @@
+DROP DATABASE IF EXISTS demo;
 CREATE DATABASE demo;
 USE demo;
 
 #게시물 테이블 생성
 CREATE TABLE article (
-    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(10) u`demo``article``demo`nsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     title CHAR(100) NOT NULL,
