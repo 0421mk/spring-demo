@@ -40,4 +40,8 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
+	public Member getMemberByLoginId(String loginId) {
+		return memberRepository.getMemberByLoginId(loginId);
+	}
+
 }
