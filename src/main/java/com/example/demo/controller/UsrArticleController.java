@@ -68,7 +68,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
-	private Object getArticleAction(int id) {
+	private Object getArticle(int id) {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
