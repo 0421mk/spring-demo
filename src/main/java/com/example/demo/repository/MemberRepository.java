@@ -35,4 +35,7 @@ public interface MemberRepository {
 	@Select("SELECT * FROM `member` AS M WHERE M.email = #{email}")
 	public Member getMemberByEmail(@Param("email") String email);
 
+	@Select("SELECT * FROM `member` AS M WHERE M.cellphoneNo = #{cellphoneNo}")
+	public Member getMemberByCellphonNo(@Param("cellphoneNo") String cellphoneNo);
+
 }
