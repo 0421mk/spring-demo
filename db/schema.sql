@@ -4,7 +4,7 @@ USE demo;
 
 #게시물 테이블 생성
 CREATE TABLE article (
-    id INT(10) u`demo``article``demo`nsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     title CHAR(100) NOT NULL,
@@ -55,7 +55,7 @@ loginPw = 'admin',
 `name` = '관리자',
 nickname = '관리자',
 cellphoneNo = '01011111111',
-email = '0421mk@gmail.com',
+email = 'admin@gmail.com',
 `authLevel` = 7;
 
 INSERT INTO `member`
@@ -65,15 +65,15 @@ loginId = 'user1',
 loginPw = 'user1',
 `name` = '사용자1',
 nickname = '사용자1',
-cellphoneNo = '01011111111',
-email = '0421mk@gmail.com';
+cellphoneNo = '01011111112',
+email = 'user1@gmail.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user2',
 loginPw = 'user2',
-`name` = '사용자2',`article``article`
+`name` = '사용자2',
 nickname = '사용자2',
-cellphoneNo = '01011111111',
-email = '0421mk@gmail.com';
+cellphoneNo = '01011111113',
+email = 'user2@gmail.com';
