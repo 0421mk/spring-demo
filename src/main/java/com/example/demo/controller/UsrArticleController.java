@@ -1,15 +1,15 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
+import com.example.demo.util.Util;
 import com.example.demo.vo.Article;
+import com.example.demo.vo.ResultData;
 
 @Controller
 public class UsrArticleController {
@@ -68,16 +68,17 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
-	private Object getArticle(int id) {
+	private ResultData getArticle(int id) {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
-			return id + "번 게시물은 존재하지 않습니다.";
+			
+			return ResultData.from("F-1", Util.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
 
 		// return 값이 String 일수도 있고 Object 일 수도 있어서 모든 것을 통칭하는 Object 리턴 자료형으로 설정
 
-		return article;
+		return ResultData.from("S-1", Util.f("%d번 게시물이 존재합니다.", id), article);
 	}
 	// 액션 메서드 종료
 

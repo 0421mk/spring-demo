@@ -16,6 +16,11 @@ public class ResultData {
 	}
 	
 	//ResultData 객체를 반환
+		public static ResultData from(String resultCode, String msg) {
+			return from(resultCode, msg, null);
+		}
+	
+	//ResultData 객체를 반환
 	public static ResultData from(String resultCode, String msg, Object data1) {
 		ResultData rd = new ResultData();
 		
