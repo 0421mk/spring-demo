@@ -30,7 +30,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	private ResultData doAdd(HttpServletRequest req, String title, String body) {
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return ResultData.from("F-1", "로그인 후 이용해주세요.");
@@ -53,7 +53,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	private String doDelete(HttpServletRequest req, int id) {
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return Util.jsHistoryBack("로그인 후 이용해주세요.");
@@ -77,7 +77,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	private ResultData doModify(HttpServletRequest req, int id, String title, String body) {
-		Rq rq = new Rq(req);
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return ResultData.from("F-1", "로그인 후 이용해주세요.");
