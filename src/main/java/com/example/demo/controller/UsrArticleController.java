@@ -148,6 +148,19 @@ public class UsrArticleController {
 
 		return "usr/article/list";
 	}
+	
+	@RequestMapping("/usr/article/detail")
+	private String showDetail(Model model, int id) {
+		Article article = articleService.getArticle(id);
+		
+		if (article == null) {
+			return "/usr/home/main";
+		}
+
+		model.addAttribute("article", article);
+
+		return "usr/article/detail";
+	}
 	// 액션 메서드 종료
 
 }
