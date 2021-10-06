@@ -42,7 +42,7 @@
 		SELECT *
 		FROM article
 		ORDER BY
-		id DESC
+		id ASC
 	</select>
 	
 	<select id="getLastInsertId" resultType="int">

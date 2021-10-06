@@ -77,3 +77,9 @@ loginPw = 'user2',
 nickname = '사용자2',
 cellphoneNo = '01011111113',
 email = 'user2@gmail.com';
+
+ALTER TABLE article ADD COLUMN memberId INT(10)UNSIGNED NOT NULL AFTER `updateDate`;
+
+UPDATE article
+SET memberId = 2
+WHERE memberId = 0;
