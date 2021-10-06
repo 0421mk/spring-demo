@@ -19,7 +19,7 @@ public class UsrArticleController {
 	// @Autowired시 생성자에 articleService = new ArticleService(); 안해도됨
 	// 서비스나 Dao, Dto만 달아야 한다.
 	private ArticleService articleService;
-	
+
 	private UsrArticleController(ArticleService articleService) {
 		this.articleService = articleService;
 	}
@@ -34,24 +34,24 @@ public class UsrArticleController {
 		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 		}
-		
+
 		if (!isLogined) {
 			return ResultData.from("F-1", "로그인 후 이용해주세요.");
 		}
-		
-		loginedMemberId = (int)httpSession.getAttribute("loginedMemberId");
-		
-		if(Util.empty(title)) {
+
+		loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+
+		if (Util.empty(title)) {
 			return ResultData.from("F-2", "title(을)를 입력해주세요.");
 		}
-		
-		if(Util.empty(body)) {
+
+		if (Util.empty(body)) {
 			return ResultData.from("F-3", "body(을)를 입력해주세요.");
 		}
-		
+
 		articleService.writeArticle(loginedMemberId, title, body);
 		int id = articleService.getLastIndexId();
-		
+
 		return ResultData.from("S-1", Util.f("%d번 게시물이 생성되었습니다.", id));
 	}
 
@@ -64,19 +64,19 @@ public class UsrArticleController {
 		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 		}
-		
+
 		if (!isLogined) {
 			return ResultData.from("F-1", "로그인 후 이용해주세요.");
 		}
-		
-		loginedMemberId = (int)httpSession.getAttribute("loginedMemberId");
-		
+
+		loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
 			return ResultData.from("F-2", Util.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
-		
+
 		if (article.getMemberId() != loginedMemberId) {
 			return ResultData.from("F-3", "권한이 없습니다.");
 		}
@@ -95,19 +95,19 @@ public class UsrArticleController {
 		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 		}
-		
+
 		if (!isLogined) {
 			return ResultData.from("F-1", "로그인 후 이용해주세요.");
 		}
-		
-		loginedMemberId = (int)httpSession.getAttribute("loginedMemberId");
-		
+
+		loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
 			return ResultData.from("F-2", Util.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
-		
+
 		if (article.getMemberId() != loginedMemberId) {
 			return ResultData.from("F-3", "권한이 없습니다.");
 		}
@@ -131,7 +131,7 @@ public class UsrArticleController {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
-			
+
 			return ResultData.from("F-1", Util.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
 
@@ -139,11 +139,11 @@ public class UsrArticleController {
 
 		return ResultData.from("S-1", Util.f("%d번 게시물이 존재합니다.", id), article);
 	}
-	
+
 	@RequestMapping("/usr/article/list")
 	private String showList(Model model) {
 		List<Article> articles = articleService.getArticles();
-		
+
 		model.addAttribute("articles", articles);
 
 		return "usr/article/list";
