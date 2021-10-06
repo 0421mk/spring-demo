@@ -56,11 +56,28 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	private ResultData doDelete(int id) {
+	private ResultData doDelete(HttpSession httpSession, int id) {
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+		}
+		
+		if (!isLogined) {
+			return ResultData.from("F-1", "로그인 후 이용해주세요.");
+		}
+		
+		loginedMemberId = (int)httpSession.getAttribute("loginedMemberId");
+		
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
-			return ResultData.from("F-1", Util.f("%d번 게시물이 존재하지 않습니다.", id));
+			return ResultData.from("F-2", Util.f("%d번 게시물이 존재하지 않습니다.", id));
+		}
+		
+		if (article.getMemberId() != loginedMemberId) {
+			return ResultData.from("F-3", "작성자가 아닙니다.");
 		}
 
 		articleService.deleteArticle(id);
