@@ -1,19 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¸ÞÀÎ</title>
+<meta charset="UTF-8">
+<title>ë©”ì¸</title>
+<link rel="stylesheet" href="/resource/common.css" />
+<script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-	<h1>¸ÞÀÎ ÆäÀÌÁö</h1>
+	<h1>ë©”ì¸ íŽ˜ì´ì§€</h1>
 
 	<header>
-		<a href="/">·Î°í</a>
+		<a href="/">ë¡œê³ </a>
 		<ul>
-			<li><a href="/">È¨</a></li>
-			<li><a href="/usr/article/list">¸®½ºÆ®</a></li>
+			<li><a href="/">í™ˆ</a></li>
+			<li><a href="/usr/article/list">ë¦¬ìŠ¤íŠ¸</a></li>
 		</ul>
 	</header>
 </body>

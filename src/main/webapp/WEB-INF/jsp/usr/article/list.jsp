@@ -1,24 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>�Խù� ����Ʈ</title>
+<meta charset="UTF-8">
+<title>게시물 리스트</title>
+<link rel="stylesheet" href="/resource/common.css" />
+<script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-	<h1>�Խù� ����Ʈ</h1>
+	<h1>게시물 리스트</h1>
 	<table border="1">
 		<c:forEach var="article" items="${articles}">
 			<thead>
 				<tr>
-					<th>��ȣ</th>
-					<th>�ۼ���¥</th>
-					<th>������¥</th>
-					<th>�ۼ���</th>
-					<th>����</th>
+					<th>번호</th>
+					<th>작성날짜</th>
+					<th>수정날짜</th>
+					<th>작성자</th>
+					<th>제목</th>
 				</tr>
 			</thead>
 			<tbody>
