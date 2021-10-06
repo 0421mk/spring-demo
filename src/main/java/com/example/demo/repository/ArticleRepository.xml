@@ -13,9 +13,11 @@
 	
 	<!-- resultType 안적으면 error 뜸 -->
 	<select id="getArticle" resultType="Article">
-		SELECT *
-		FROM article
-		WHERE id = #{id}
+		SELECT A.*, M.nickname AS writerName
+		FROM article AS A
+		LEFT JOIN member AS M
+		ON A.memberId = M.id
+		WHERE A.id = #{id}
 	</select>
 	
 	<delete id="deleteArticle">
@@ -40,10 +42,12 @@
 	
 	<!-- resultType 안적으면 error 뜸, Articles도 Article로 resultType 기입 -->
 	<select id="getArticles" resultType="Article">
-		SELECT *
-		FROM article
+		SELECT A.*, M.nickname AS writerName
+		FROM article AS A
+		LEFT JOIN member AS M
+		ON A.memberId = M.id
 		ORDER BY
-		id ASC
+		A.id DESC
 	</select>
 	
 	<select id="getLastInsertId" resultType="int">

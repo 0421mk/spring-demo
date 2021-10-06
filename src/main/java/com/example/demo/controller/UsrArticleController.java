@@ -152,10 +152,6 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	private String showDetail(Model model, int id) {
 		Article article = articleService.getArticle(id);
-		
-		if (article == null) {
-			return "/usr/home/main";
-		}
 
 		model.addAttribute("article", article);
 
