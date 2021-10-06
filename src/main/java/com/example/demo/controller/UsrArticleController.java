@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -137,6 +138,15 @@ public class UsrArticleController {
 		// return 값이 String 일수도 있고 Object 일 수도 있어서 모든 것을 통칭하는 Object 리턴 자료형으로 설정
 
 		return ResultData.from("S-1", Util.f("%d번 게시물이 존재합니다.", id), article);
+	}
+	
+	@RequestMapping("/usr/article/list")
+	private String showList(Model model) {
+		List<Article> articles = articleService.getArticles();
+		
+		model.addAttribute("articles", articles);
+
+		return "usr/article/list";
 	}
 	// 액션 메서드 종료
 
