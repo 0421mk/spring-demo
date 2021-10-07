@@ -63,6 +63,10 @@ public class Rq {
 		println("</script>");
 	}
 	
+//	public void printHistoryBackJs(String msg) {
+//		println(Util.jsHistoryBack(msg));
+//	} 이렇게도 사용 가능
+	
 	public void println(String str) {
 		try {
 			this.resp.getWriter().append(str);
@@ -70,5 +74,11 @@ public class Rq {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String historyBackJsOnView(String msg) {
+		this.req.setAttribute("msg", msg);
+		this.req.setAttribute("historyBack", true);
+		return "usr/common/js";
 	}
 }
