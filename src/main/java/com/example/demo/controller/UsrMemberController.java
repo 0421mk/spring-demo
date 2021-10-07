@@ -16,68 +16,62 @@ import com.example.demo.vo.Rq;
 @Controller
 public class UsrMemberController {
 	private MemberService memberService;
-	
+
 	private UsrMemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
-	
+
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
 	public ResultData doLogout(HttpServletRequest req) {
-		HttpSession httpSession = null;
-		httpSession = req.getSession();
 		
-		Rq rq = new Rq(req);
-		
-		if (!rq.isLogined()) {
-			return ResultData.from("F-1", "이미 로그아웃 상태입니다.");
-		}
-		
-		httpSession.removeAttribute("loginedMemberId");
-		
+		Rq rq = (Rq) req.getAttribute("rq");
+
+		rq.logout();
+
 		return ResultData.from("S-1", "로그아웃 되었습니다.");
 	}
-	
+
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public ResultData doJoin(HttpServletRequest req, String loginId, String loginPw) {
-		HttpSession httpSession = null;
-		httpSession = req.getSession();
-		
-		Rq rq = new Rq(req);
-		
+
+		Rq rq = (Rq) req.getAttribute("rq");
+
 		if (rq.isLogined()) {
-			return ResultData.from("F-5", "이미 로그인되어 있습니다.");
+			return ResultData.from("F-1", "로그아웃 후 이용해주세요.");
 		}
-		
+
 		if (Util.empty(loginId)) {
-			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
+			return ResultData.from("F-2", "loginId(을)를 입력해주세요.");
 		}
 
 		if (Util.empty(loginPw)) {
-			return ResultData.from("F-2", "loginPw(을)를 입력해주세요.");
+			return ResultData.from("F-3", "loginPw(을)를 입력해주세요.");
 		}
 
 		Member member = memberService.getMemberByLoginId(loginId);
 		String memberNickname = member.getNickname();
-		
-		if(member == null) {
-			return ResultData.from("F-3", "존재하지 않는 아이디입니다.");
+
+		if (member == null) {
+			return ResultData.from("F-4", "존재하지 않는 아이디입니다.");
 		}
-		
+
 		// equals로 처리해야한다.
-		if(member.getLoginPw().equals(loginPw) == false) {
-			return ResultData.from("F-4", "비밀번호가 일치하지 않습니다.");
+		if (member.getLoginPw().equals(loginPw) == false) {
+			return ResultData.from("F-5", "비밀번호가 일치하지 않습니다.");
 		}
 		
-		httpSession.setAttribute("loginedMemberId", member.getId());
-		
+		rq.login(member);
+
 		return ResultData.from("S-1", Util.f("로그인에 성공하였습니다. 환영합니다 %s님!", memberNickname), member);
 	}
 
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
+	public ResultData doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
+			String email) {
+
 		if (Util.empty(loginId)) {
 			return ResultData.from("F-1", "loginId(을)를 입력해주세요.");
 		}
@@ -101,21 +95,21 @@ public class UsrMemberController {
 		if (Util.empty(email)) {
 			return ResultData.from("F-6", "email(을)를 입력해주세요.");
 		}
-		
+
 		int id = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
-		
-		if ( id == -1 ) {
+
+		if (id == -1) {
 			return ResultData.from("F-7", Util.f("해당 로그인아이디(%s)는 이미 사용중입니다.", loginId));
 		}
-		
-		if ( id == -2 ) {
+
+		if (id == -2) {
 			return ResultData.from("F-8", Util.f("해당 이메일(%s)은 이미 사용중입니다.", email));
 		}
-		
-		if ( id == -3 ) {
+
+		if (id == -3) {
 			return ResultData.from("F-9", Util.f("해당 전화번호(%s)는 이미 사용중입니다.", cellphoneNo));
 		}
-		
+
 		Member member = memberService.getMemberById(id);
 		return ResultData.from("S-1", Util.f("회원가입에 성공하였습니다.", name, email), member);
 	}
