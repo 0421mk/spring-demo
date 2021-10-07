@@ -69,7 +69,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/modify")
-	private String showModify(HttpServletRequest req, int id) {
+	private String showModify(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
 		
 		Article article = articleService.getArticle(id);
@@ -82,28 +82,30 @@ public class UsrArticleController {
 			return rq.historyBackJsOnView("권한이 없습니다.");
 		}
 		
+		model.addAttribute("article", article);
+		
 		return "usr/article/modify";
 	}
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	private ResultData doModify(HttpServletRequest req, int id, String title, String body) {
+	private String doModify(HttpServletRequest req, int id, String title, String body) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 		
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
-			return ResultData.from("F-2", Util.f("%d번 게시물이 존재하지 않습니다.", id));
+			return Util.jsHistoryBack(Util.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
 
 		if (article.getMemberId() != rq.getLoginedMemberId()) {
-			return ResultData.from("F-3", "권한이 없습니다.");
+			return Util.jsHistoryBack("권한이 없습니다.");
 		}
 
 		articleService.modifyArticle(id, title, body);
 
-		return ResultData.from("S-1", Util.f("%d번 게시물을 수정하였습니다.", id));
+		return Util.jsReplace(Util.f("%d번 게시물을 수정했습니다.", id), "../article/list");
 	}
 
 	@RequestMapping("/usr/article/getArticles")
