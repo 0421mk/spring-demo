@@ -27,9 +27,9 @@ public class UsrArticleController {
 	}
 
 	// 액션 메서드 시작
-	@RequestMapping("/usr/article/doAdd")
+	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	private ResultData doAdd(HttpServletRequest req, String title, String body) {
+	private ResultData doWrite(HttpServletRequest req, String title, String body) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
