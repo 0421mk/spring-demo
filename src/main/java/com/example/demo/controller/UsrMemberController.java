@@ -22,6 +22,7 @@ public class UsrMemberController {
 	}
 
 	@RequestMapping("/usr/member/doLogout")
+	@ResponseBody //이게 있어야 Body로 return 값이 노출된다. 이게 없으면 Url로 인식
 	public String doLogout(HttpServletRequest req) {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
