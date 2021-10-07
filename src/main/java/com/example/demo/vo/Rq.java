@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.demo.repository.MemberRepository;
+import com.example.demo.service.MemberService;
 import com.example.demo.util.Util;
 
 import lombok.Getter;
@@ -15,6 +17,7 @@ public class Rq {
 	private boolean isLogined;
 	@Getter
 	private int loginedMemberId;
+	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
