@@ -26,6 +26,10 @@ public class ArticleService {
 	public Article getArticle(int id) {
 		return articleRepository.getArticle(id);
 	}
+	
+	public Article getArticleByMemberId(int memberId) {
+		return articleRepository.getArticleByMemberId(memberId);
+	}
 
 	public void deleteArticle(int id) {
 		articleRepository.deleteArticle(id);

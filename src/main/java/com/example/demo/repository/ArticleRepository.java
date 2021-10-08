@@ -24,4 +24,6 @@ public interface ArticleRepository {
 	public List<Article> getArticles();
 	
 	public int getLastInsertId();
+
+	public Article getArticleByMemberId(@Param("memberId") int memberId);
 }

@@ -49,8 +49,12 @@ public class UsrArticleController {
 
 		int id = rq.getLoginedMemberId();
 		articleService.writeArticle(id, title, body);
-
-		return Util.jsReplace(Util.f("%d번 게시물이 생성되었습니다.", id), "../article/list");
+		
+		Article article = articleService.getArticleByMemberId(id);
+		int articleId = article.getId();
+		String replaceUri = "../article/detail?id=" + articleId;
+		
+		return Util.jsReplace(Util.f("%d번 게시물이 생성되었습니다.", articleId), replaceUri);
 	}
 
 	@RequestMapping("/usr/article/doDelete")

@@ -20,6 +20,14 @@
 		WHERE A.id = #{id}
 	</select>
 	
+	<select id="getArticleByMemberId" resultType="Article">
+		SELECT *
+		FROM article
+		WHERE memberId = #{memberId}
+		ORDER BY regDate DESC
+		LIMIT 1
+	</select>
+	
 	<delete id="deleteArticle">
 		DELETE
 		FROM article
