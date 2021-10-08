@@ -17,12 +17,14 @@ public class Rq {
 	private boolean isLogined;
 	@Getter
 	private int loginedMemberId;
+	@Getter
+	private Member loginedMember;
 	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
 
-	public Rq(HttpServletRequest req, HttpServletResponse resp) {
+	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;
 		
@@ -30,14 +32,17 @@ public class Rq {
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 		this.session = req.getSession();
+		Member loginedMember = null;
 
 		if (this.session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) this.session.getAttribute("loginedMemberId");
+			loginedMember = memberService.getMemberById(loginedMemberId);
 		}
 
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
+		this.loginedMember = loginedMember;
 
 	}
 
