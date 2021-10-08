@@ -29,3 +29,7 @@ html > body  {
 btn-text-link:hover {
 	text-decoration: underline;
 }
+
+body {
+	min-width:800px;
+}
