@@ -146,8 +146,14 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/list")
 	private String showList(HttpServletRequest req, int boardId, Model model) {
+		Rq rq = (Rq) req.getAttribute("rq");
+		
 		List<Article> articles = articleService.getArticlesByMemberId(boardId);
-		Board board = boardService.getBoardById(boardId);	
+		Board board = boardService.getBoardById(boardId);
+		
+		if(board == null) {
+			return rq.historyBackJsOnView("존재하지 않는 게시판입니다.");
+		}
 		
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);
