@@ -23,10 +23,12 @@ public class UsrArticleController {
 	// 서비스나 Dao, Dto만 달아야 한다.
 	private ArticleService articleService;
 	private BoardService boardService;
+	private Rq rq;
 
-	private UsrArticleController(ArticleService articleService, BoardService boardService) {
+	private UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.rq = rq;
 	}
 
 	// 액션 메서드 시작
@@ -38,10 +40,8 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	private String doWrite(HttpServletRequest req, String title, String body) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
-		
+	private String doWrite(String title, String body) {
+
 		if (Util.empty(title)) {
 			return Util.jsHistoryBack("title(을)를 입력해주세요.");
 		}
@@ -62,9 +62,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	private String doDelete(HttpServletRequest req, int id) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
+	private String doDelete(int id) {
 
 		Article article = articleService.getArticle(id);
 
@@ -82,9 +80,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/modify")
-	private String showModify(HttpServletRequest req, Model model, int id) {
-		Rq rq = (Rq) req.getAttribute("rq");
-		
+	private String showModify(Model model, int id) {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
@@ -102,10 +98,8 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	private String doModify(HttpServletRequest req, int id, String title, String body) {
+	private String doModify(int id, String title, String body) {
 
-		Rq rq = (Rq) req.getAttribute("rq");
-		
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
@@ -145,9 +139,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	private String showList(HttpServletRequest req, int boardId, Model model) {
-		Rq rq = (Rq) req.getAttribute("rq");
-		
+	private String showList(int boardId, Model model) {	
 		List<Article> articles = articleService.getArticlesByMemberId(boardId);
 		Board board = boardService.getBoardById(boardId);
 		

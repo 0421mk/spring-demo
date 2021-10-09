@@ -12,15 +12,9 @@ import com.example.demo.vo.Rq;
 
 @Component("beforeActionInterceptor")
 public class BeforeActionInterceptor implements HandlerInterceptor {
-	@Autowired
-	private MemberService memberService;
-	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
-		Rq rq = new Rq(req, resp, memberService);
-
-		// req에 rq 등록
-		req.setAttribute("rq", rq);
+		// 이제는 Rq 객체가 자동으로 만들어지기 때문에 필요없음
 		
 		return HandlerInterceptor.super.preHandle(req, resp, handler);
 	}

@@ -16,17 +16,16 @@ import com.example.demo.vo.Rq;
 @Controller
 public class UsrMemberController {
 	private MemberService memberService;
+	private Rq rq;
 
-	private UsrMemberController(MemberService memberService) {
+	private UsrMemberController(MemberService memberService, Rq rq) {
 		this.memberService = memberService;
+		this.rq = rq;
 	}
 
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody //이게 있어야 Body로 return 값이 노출된다. 이게 없으면 Url로 인식
-	public String doLogout(HttpServletRequest req) {
-		
-		Rq rq = (Rq) req.getAttribute("rq");
-
+	public String doLogout() {
 		rq.logout();
 
 		return Util.jsReplace("로그아웃 되었습니다.", "/");
@@ -39,8 +38,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doJoin(HttpServletRequest req, String loginId, String loginPw) {
-		Rq rq = (Rq) req.getAttribute("rq");
+	public String doJoin(String loginId, String loginPw) {
 		
 		if (rq.isLogined()) {
 			return Util.jsHistoryBack("로그아웃 후 이용해주세요.");
