@@ -106,7 +106,7 @@ INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'free',
-`name` = '자유게시판';
+`name` = '자유';
 
 
 #게시판 테이블에 boardId 칼럼 추가
@@ -118,5 +118,3 @@ SET boardId =  1;
 UPDATE article
 SET boardId =  2
 WHERE id IN (3);`article`
-
-SELECT * FROM article;

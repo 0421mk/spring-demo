@@ -43,6 +43,16 @@
           </a>
         </li>
         <li>
+          <a href="/usr/article/list?boardId=1" class="h-full flex px-3 items-center hover:underline">
+            <span>공지사항</span>
+          </a>
+        </li>
+        <li>
+          <a href="/usr/article/list?boardId=2" class="h-full flex px-3 items-center hover:underline">
+            <span>자유</span>
+          </a>
+        </li>
+        <li>
           <a href="/usr/article/list" class="h-full flex px-3 items-center hover:underline">
             <span>리스트</span>
           </a>

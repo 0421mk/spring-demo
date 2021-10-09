@@ -46,4 +46,8 @@ public class ArticleService {
 	public int getLastIndexId() {
 		return articleRepository.getLastInsertId();
 	}
+
+	public List<Article> getArticlesByMemberId(int boardId) {
+		return articleRepository.getArticlesByMemberId(boardId);
+	}
 }

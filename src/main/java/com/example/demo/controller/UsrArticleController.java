@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
+import com.example.demo.service.BoardService;
 import com.example.demo.util.Util;
 import com.example.demo.vo.Article;
+import com.example.demo.vo.Board;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
@@ -21,9 +22,11 @@ public class UsrArticleController {
 	// @Autowired시 생성자에 articleService = new ArticleService(); 안해도됨
 	// 서비스나 Dao, Dto만 달아야 한다.
 	private ArticleService articleService;
+	private BoardService boardService;
 
-	private UsrArticleController(ArticleService articleService) {
+	private UsrArticleController(ArticleService articleService, BoardService boardService) {
 		this.articleService = articleService;
+		this.boardService = boardService;
 	}
 
 	// 액션 메서드 시작
@@ -142,10 +145,12 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	private String showList(Model model) {
-		List<Article> articles = articleService.getArticles();
-
+	private String showList(HttpServletRequest req, int boardId, Model model) {
+		List<Article> articles = articleService.getArticlesByMemberId(boardId);
+		Board board = boardService.getBoardById(boardId);	
+		
 		model.addAttribute("articles", articles);
+		model.addAttribute("board", board);
 
 		return "usr/article/list";
 	}
