@@ -50,4 +50,8 @@ public class ArticleService {
 	public List<Article> getArticlesByMemberId(int boardId) {
 		return articleRepository.getArticlesByMemberId(boardId);
 	}
+
+	public int getArticleCount(int boardId) {
+		return articleRepository.getArticleCount(boardId);
+	}
 }

@@ -68,6 +68,12 @@
 		A.id DESC
 	</select>
 	
+	<select id="getArticleCount" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM article
+		WHERE boardId = #{boardId}
+	</select>
+	
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>

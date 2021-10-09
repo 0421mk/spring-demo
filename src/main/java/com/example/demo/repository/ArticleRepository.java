@@ -28,4 +28,6 @@ public interface ArticleRepository {
 	public Article getArticleByMemberId(@Param("memberId") int memberId);
 
 	public List<Article> getArticlesByMemberId(@Param("boardId") int boardId);
+
+	public int getArticleCount(@Param("boardId") int boardId);
 }
