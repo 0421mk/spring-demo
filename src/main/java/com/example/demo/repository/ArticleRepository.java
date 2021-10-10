@@ -31,5 +31,5 @@ public interface ArticleRepository {
 
 	public int getArticleCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
 
-	public List<Article> getArticlesListPage(@Param("boardId") int boardId, @Param("limitStart") int limitStart, @Param("limitCnt") int limitCnt);
+	public List<Article> getArticlesListPage(int boardId, int limitStart, int limitCnt, String searchKeywordTypeCode, String searchKeyword);
 }

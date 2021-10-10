@@ -55,11 +55,11 @@ public class ArticleService {
 		return articleRepository.getArticleCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
-	public List<Article> getArticlesListPage(int boardId, int itemsInAPage, int page) {
+	public List<Article> getArticlesListPage(int boardId, int itemsInAPage, int page, String searchKeywordTypeCode, String searchKeyword) {
 		
 		int limitStart = (page - 1) * itemsInAPage;
 		int limitCnt = itemsInAPage;
 		
-		return articleRepository.getArticlesListPage(boardId, limitStart, limitCnt);
+		return articleRepository.getArticlesListPage(boardId, limitStart, limitCnt, searchKeywordTypeCode, searchKeyword);
 	}
 }

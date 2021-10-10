@@ -144,7 +144,7 @@ public class UsrArticleController {
 		
 		int itemsInAPage = 10;
 		
-		List<Article> articles = articleService.getArticlesListPage(boardId, itemsInAPage, page);
+		List<Article> articles = articleService.getArticlesListPage(boardId, itemsInAPage, page, searchKeywordTypeCode, searchKeyword);
 		Board board = boardService.getBoardById(boardId);
 		
 		if(board == null) {
