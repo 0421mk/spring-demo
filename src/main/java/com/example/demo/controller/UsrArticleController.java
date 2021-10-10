@@ -152,7 +152,11 @@ public class UsrArticleController {
 		}
 		
 		int articleCount = articleService.getArticleCount(boardId);
+	
+		int pagesCount = (int)Math.ceil((double)articleCount / itemsInAPage);
 		
+		model.addAttribute("page", page);
+		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("articleCount", articleCount);
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);
