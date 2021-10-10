@@ -41,9 +41,23 @@
 
     <div class="page-wrap mt-3">
       <div class="btn-group flex justify-center">
-        <c:forEach begin="1" end="${pagesCount}" var="i">
-          <a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i}">${i}</a>
+        <c:set var="pageMenuArmLen" value="3" />
+        <c:set var="startPage"
+          value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1 }" />
+        <c:set var="endPage"
+          value="${page + pageMenuArmLen >= pagesCount ? pagesCount : page + pageMenuArmLen }" />
+        <c:set var="pageMenuArmLen" value="9" />
+        
+        <c:if test="${startPage > 1}">
+           <a class="btn btn-sm" href="?page=1&boardId=${board.id}">◀◀</a>
+        </c:if>
+        <c:forEach begin="${startPage}" end="${endPage}" var="i">
+          <a class="btn btn-sm ${page == i ? 'btn-active' : '' }"
+            href="?page=${i}&boardId=${board.id}">${i}</a>
         </c:forEach>
+        <c:if test="${endPage < pagesCount}">
+           <a class="btn btn-sm" href="?page=${pagesCount}&boardId=${board.id}">▶▶</a>
+        </c:if>
       </div>
     </div>
 
