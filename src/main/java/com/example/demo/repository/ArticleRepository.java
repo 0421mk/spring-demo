@@ -30,4 +30,6 @@ public interface ArticleRepository {
 	public List<Article> getArticlesByMemberId(@Param("boardId") int boardId);
 
 	public int getArticleCount(@Param("boardId") int boardId);
+
+	public List<Article> getArticlesListPage(@Param("boardId") int boardId, @Param("limitStart") int limitStart, @Param("limitCnt") int limitCnt);
 }

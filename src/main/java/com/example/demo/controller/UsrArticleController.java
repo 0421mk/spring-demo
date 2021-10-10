@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
@@ -139,8 +140,11 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	private String showList(int boardId, Model model) {	
-		List<Article> articles = articleService.getArticlesByMemberId(boardId);
+	private String showList(@RequestParam(defaultValue ="1") int boardId, @RequestParam(defaultValue ="1") int page, Model model) {	
+		
+		int itemsInAPage = 10;
+		
+		List<Article> articles = articleService.getArticlesListPage(boardId, itemsInAPage, page);
 		Board board = boardService.getBoardById(boardId);
 		
 		if(board == null) {

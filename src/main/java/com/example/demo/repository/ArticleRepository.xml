@@ -5,36 +5,39 @@
 	<insert id="writeArticle">
 		INSERT INTO article
 		SET title = #{title},
-		`body` = #{body},
+		`body` =
+		#{body},
 		memberId = #{memberId},
 		boardId = #{boardId},
 		regDate = NOW(),
 		updateDate = NOW()
 	</insert>
-	
+
 	<!-- resultType 안적으면 error 뜸 -->
 	<select id="getArticle" resultType="Article">
-		SELECT A.*, M.nickname AS writerName
+		SELECT A.*, M.nickname AS
+		writerName
 		FROM article AS A
 		LEFT JOIN member AS M
 		ON A.memberId = M.id
 		WHERE A.id = #{id}
 	</select>
-	
+
 	<select id="getArticleByMemberId" resultType="Article">
 		SELECT *
-		FROM article
+		FROM
+		article
 		WHERE memberId = #{memberId}
 		ORDER BY regDate DESC
 		LIMIT 1
 	</select>
-	
+
 	<delete id="deleteArticle">
 		DELETE
 		FROM article
 		WHERE id = #{id}
 	</delete>
-	
+
 	<update id="modifyArticle">
 		UPDATE article
 		<set>
@@ -48,33 +51,48 @@
 		</set>
 		WHERE id = #{id}
 	</update>
-	
+
 	<!-- resultType 안적으면 error 뜸, Articles도 Article로 resultType 기입 -->
 	<select id="getArticles" resultType="Article">
-		SELECT A.*, M.nickname AS writerName
+		SELECT A.*, M.nickname AS
+		writerName
 		FROM article AS A
 		LEFT JOIN member AS M
 		ON A.memberId = M.id
 		ORDER BY
 		A.id DESC
 	</select>
-	
-	<select id="getArticlesByMemberId" resultType="Article">
-		SELECT A.*, M.nickname AS writerName
+
+	<select id="getArticlesListPage" resultType="Article">
+		SELECT A.*,
+		M.nickname AS writerName
 		FROM article AS A
 		LEFT JOIN member AS M
 		ON A.memberId = M.id
 		WHERE boardId = #{boardId}
 		ORDER BY
 		A.id DESC
+		LIMIT #{limitStart}, #{limitCnt}
 	</select>
-	
+
+	<select id="getArticlesByMemberId" resultType="Article">
+		SELECT A.*,
+		M.nickname AS writerName
+		FROM article AS A
+		LEFT JOIN member AS M
+		ON
+		A.memberId = M.id
+		WHERE boardId = #{boardId}
+		ORDER BY
+		A.id DESC
+	</select>
+
 	<select id="getArticleCount" resultType="int">
 		SELECT COUNT(*) AS cnt
 		FROM article
 		WHERE boardId = #{boardId}
 	</select>
-	
+
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()
 	</select>
