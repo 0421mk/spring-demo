@@ -51,8 +51,8 @@ public class ArticleService {
 		return articleRepository.getArticlesByMemberId(boardId);
 	}
 
-	public int getArticleCount(int boardId) {
-		return articleRepository.getArticleCount(boardId);
+	public int getArticleCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticleCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
 	public List<Article> getArticlesListPage(int boardId, int itemsInAPage, int page) {

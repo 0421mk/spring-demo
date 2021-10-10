@@ -68,11 +68,13 @@
 		M.nickname AS writerName
 		FROM article AS A
 		LEFT JOIN member AS M
-		ON A.memberId = M.id
+		ON
+		A.memberId = M.id
 		WHERE boardId = #{boardId}
 		ORDER BY
 		A.id DESC
-		LIMIT #{limitStart}, #{limitCnt}
+		LIMIT
+		#{limitStart}, #{limitCnt}
 	</select>
 
 	<select id="getArticlesByMemberId" resultType="Article">
@@ -89,8 +91,25 @@
 
 	<select id="getArticleCount" resultType="int">
 		SELECT COUNT(*) AS cnt
-		FROM article
+		FROM article AS A
 		WHERE boardId = #{boardId}
+		<if test="searchKeyword != ''">
+			<choose>
+				<when test="searchKeywordTypeCode == 'title'">
+					AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="searchKeywordTypeCode == 'body'">
+					AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<otherwise>
+					AND (
+					A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR
+					A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+					)
+				</otherwise>
+			</choose>
+		</if>
 	</select>
 
 	<select id="getLastInsertId" resultType="int">

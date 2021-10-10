@@ -49,14 +49,14 @@
         <c:set var="pageMenuArmLen" value="9" />
         
         <c:if test="${startPage > 1}">
-           <a class="btn btn-sm" href="?page=1&boardId=${board.id}">◀◀</a>
+           <a class="btn btn-sm" href="?page=${pagesCount}&boardId=${board.id}&searchKeywordTypeCode=${searchKeywordTypeCode}&searchKeyword=${searchKeyword}">◀◀</a>
         </c:if>
         <c:forEach begin="${startPage}" end="${endPage}" var="i">
           <a class="btn btn-sm ${page == i ? 'btn-active' : '' }"
-            href="?page=${i}&boardId=${board.id}">${i}</a>
+            href="?page=${pagesCount}&boardId=${board.id}&searchKeywordTypeCode=${searchKeywordTypeCode}&searchKeyword=${searchKeyword}">${i}</a>
         </c:forEach>
         <c:if test="${endPage < pagesCount}">
-           <a class="btn btn-sm" href="?page=${pagesCount}&boardId=${board.id}">▶▶</a>
+           <a class="btn btn-sm" href="?page=${pagesCount}&boardId=${board.id}&searchKeywordTypeCode=${searchKeywordTypeCode}&searchKeyword=${searchKeyword}">▶▶</a>
         </c:if>
       </div>
     </div>
