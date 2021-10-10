@@ -62,4 +62,10 @@ public class ArticleService {
 		
 		return articleRepository.getArticlesListPage(boardId, limitStart, limitCnt, searchKeywordTypeCode, searchKeyword);
 	}
+
+	public void increaseHit(int id) {
+		
+		articleRepository.increaseHit(id);
+		
+	}
 }

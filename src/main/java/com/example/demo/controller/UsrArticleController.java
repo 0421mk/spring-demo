@@ -35,14 +35,14 @@ public class UsrArticleController {
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/write")
 	private String showWrite(HttpServletRequest req) {
-		
+
 		return "usr/article/write";
 	}
-	
+
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	private String doWrite(int boardId, String title, String body) {
-		
+
 		if (Util.empty(title)) {
 			return Util.jsHistoryBack("title(을)를 입력해주세요.");
 		}
@@ -53,11 +53,11 @@ public class UsrArticleController {
 
 		int id = rq.getLoginedMemberId();
 		articleService.writeArticle(id, title, body, boardId);
-		
+
 		Article article = articleService.getArticleByMemberId(id);
 		int articleId = article.getId();
 		String replaceUri = "../article/detail?id=" + articleId;
-		
+
 		return Util.jsReplace(Util.f("%d번 게시물이 생성되었습니다.", articleId), replaceUri);
 	}
 
@@ -87,16 +87,16 @@ public class UsrArticleController {
 		if (article == null) {
 			return rq.historyBackJsOnView(Util.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
-		
+
 		if (article.getMemberId() != rq.getLoginedMemberId()) {
 			return rq.historyBackJsOnView("권한이 없습니다.");
 		}
-		
+
 		model.addAttribute("article", article);
-		
+
 		return "usr/article/modify";
 	}
-	
+
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	private String doModify(int id, String title, String body) {
@@ -140,21 +140,25 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	private String showList(@RequestParam(defaultValue ="1") int boardId, @RequestParam(defaultValue ="default") String searchKeywordTypeCode, @RequestParam(defaultValue ="") String searchKeyword, @RequestParam(defaultValue ="1") int page, Model model) {	
-		
+	private String showList(@RequestParam(defaultValue = "1") int boardId,
+			@RequestParam(defaultValue = "default") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page,
+			Model model) {
+
 		int itemsInAPage = 10;
-		
-		List<Article> articles = articleService.getArticlesListPage(boardId, itemsInAPage, page, searchKeywordTypeCode, searchKeyword);
+
+		List<Article> articles = articleService.getArticlesListPage(boardId, itemsInAPage, page, searchKeywordTypeCode,
+				searchKeyword);
 		Board board = boardService.getBoardById(boardId);
-		
-		if(board == null) {
+
+		if (board == null) {
 			return rq.historyBackJsOnView("존재하지 않는 게시판입니다.");
 		}
-		
+
 		int articleCount = articleService.getArticleCount(boardId, searchKeywordTypeCode, searchKeyword);
-	
-		int pagesCount = (int)Math.ceil((double)articleCount / itemsInAPage);
-		
+
+		int pagesCount = (int) Math.ceil((double) articleCount / itemsInAPage);
+
 		model.addAttribute("page", page);
 		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("articleCount", articleCount);
@@ -166,12 +170,18 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/detail")
 	private String showDetail(Model model, int id) {
+		articleService.increaseHit(id);
+		
 		Article article = articleService.getArticle(id);
+		
+		if(article == null) {
+			return rq.historyBackJsOnView("존재하지 않는 게시글입니다.");
+		}
 
 		model.addAttribute("article", article);
 
-			return "usr/article/detail";
-		}
+		return "usr/article/detail";
+	}
 	// 액션 메서드 종료
 
 }

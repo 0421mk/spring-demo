@@ -32,6 +32,7 @@
           <thead>
             <tr>
               <th>번호</th>
+              <th>조회수</th>
               <th>작성날짜</th>
               <th>수정날짜</th>
               <th>작성자</th>
@@ -41,6 +42,7 @@
           <tbody>
             <tr>
               <td>${article.id}</td>
+              <td>${article.hitCount}</td>
               <td>${article.regDate.substring(2, 16)}</td>
               <td>${article.updateDate.substring(2, 16)}</td>
               <td>${article.writerName}</td>

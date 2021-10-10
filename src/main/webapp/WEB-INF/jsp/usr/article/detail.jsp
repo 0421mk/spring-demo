@@ -17,6 +17,10 @@
             <th>${article.id}</th>
           </tr>
           <tr>
+            <th>조회수</th>
+            <th>${article.hitCount}</th>
+          </tr>
+          <tr>
             <th>작성날짜</th>
             <th>${article.regDate.substring(2, 16)}</th>
           </tr>
