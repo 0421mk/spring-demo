@@ -7,6 +7,19 @@
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div>게시물 수 : ${articleCount}</div>
+    <div class="search-wrap">
+      <form action="">
+        <input type="hidden" name="boardId" value="${param.boardId}" />
+        <select name="searchKeywordTypeCode" id="">
+          <option value="title">제목</option>
+          <option value="body">내용</option>
+          <option value="default">제목, 내용</option>
+        </select>
+        
+        <input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="검색어를 입력해주세요."/>
+        <button type="submit">검색</button>
+      </form>
+    </div>
     <div class="table-box-type-1">
       <table>
         <colgroup>
