@@ -92,4 +92,9 @@ public class Rq {
 		this.req.setAttribute("historyBack", true);
 		return "usr/common/js";
 	}
+
+	// rq 생성자 실행 유도
+	public void init() {
+		
+	}
 }
