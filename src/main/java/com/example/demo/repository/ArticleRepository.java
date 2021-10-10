@@ -13,7 +13,7 @@ import com.example.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
-	public void writeArticle(@Param("memberId") int loginedMemberId, @Param("title") String title, @Param("body") String body);
+	public void writeArticle(@Param("memberId") int loginedMemberId, @Param("title") String title, @Param("body") String body, @Param("boardId") int boardId);
 
 	public Article getArticle(@Param("id") int id);
 
