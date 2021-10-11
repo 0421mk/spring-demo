@@ -14,17 +14,20 @@
           <option value="title">제목</option>
           <option value="body">내용</option>
           <option value="default">제목, 내용</option>
-        </select>
-        
-        <input type="text" name="searchKeyword" value="${param.searchKeyword}" placeholder="검색어를 입력해주세요."/>
+        </select> <input type="text" name="searchKeyword"
+          value="${param.searchKeyword}" placeholder="검색어를 입력해주세요." />
         <button type="submit">검색</button>
       </form>
     </div>
     <div class="table-box-type-1">
       <table>
         <colgroup>
-          <col width="50" />
-          <col width="150" />
+          <col width="20" />
+          <col width="20" />
+          <col width="80" />
+          <col width="80" />
+          <col width="20" />
+          <col width="20" />
           <col width="150" />
           <col width="150" />
         </colgroup>
@@ -35,6 +38,8 @@
               <th>조회수</th>
               <th>작성날짜</th>
               <th>수정날짜</th>
+              <th>좋아요</th>
+              <th>싫어요</th>
               <th>작성자</th>
               <th>제목</th>
             </tr>
@@ -43,9 +48,11 @@
             <tr>
               <td>${article.id}</td>
               <td>${article.hitCount}</td>
-              <td>${article.regDate.substring(2, 16)}</td>
-              <td>${article.updateDate.substring(2, 16)}</td>
-              <td>${article.writerName}</td>
+              <td>${article.getForPrintRegDate()}</td>
+              <td>${article.getForPrintUpdateDate()}</td>
+              <td>${article.extra_likePoint}</td>
+              <td>${article.extra_disLikePoint * -1}</td>
+              <td>${article.extra_writerName}</td>
               <td><a href="../article/detail?id=${article.id}"
                 class="btn-text-link">${article.title}</a></td>
             </tr>
@@ -61,17 +68,18 @@
           value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1 }" />
         <c:set var="endPage"
           value="${page + pageMenuArmLen >= pagesCount ? pagesCount : page + pageMenuArmLen }" />
-        <c:set var="baseUri" value="boardId=${board.id}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}" /> 
-        
+        <c:set var="baseUri"
+          value="boardId=${board.id}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}" />
+
         <c:if test="${startPage > 1}">
-           <a class="btn btn-sm" href="?page=1&${baseUri}">◀◀</a>
+          <a class="btn btn-sm" href="?page=1&${baseUri}">◀◀</a>
         </c:if>
         <c:forEach begin="${startPage}" end="${endPage}" var="i">
           <a class="btn btn-sm ${page == i ? 'btn-active' : '' }"
             href="?page=${i}&${baseUri}">${i}</a>
         </c:forEach>
         <c:if test="${endPage < pagesCount}">
-           <a class="btn btn-sm" href="?page=${pagesCount}&${baseUri}">▶▶</a>
+          <a class="btn btn-sm" href="?page=${pagesCount}&${baseUri}">▶▶</a>
         </c:if>
       </div>
     </div>

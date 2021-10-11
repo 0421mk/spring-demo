@@ -131,4 +131,27 @@ CONCAT('제목_', RAND()), CONCAT('내용_', RAND()) FROM article;
 ALTER TABLE article
 ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL AFTER `body`;
 
-DESC article;
+#좋아요 테이블
+CREATE TABLE liketable (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL COMMENT '관련데이터번호',
+    `point` SMALLINT(2) NOT NULL COMMENT '좋아요=1, 싫어요=-1'
+);
+
+#리액션 포인트 테스트 데이터
+INSERT INTO liketable
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relId = 2,
+`point` = 1;
+    
+INSERT INTO liketable
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relId = 1,
+`point` = -1;

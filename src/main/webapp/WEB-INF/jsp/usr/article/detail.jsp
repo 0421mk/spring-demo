@@ -21,16 +21,25 @@
             <td class="article_detail_count">${article.hitCount}</td>
           </tr>
           <tr>
+          <tr>
+            <th>좋아요</th>
+            <td>${article.extra_likePoint}</td>
+          </tr>
+          <tr>
+            <th>싫어요</th>
+            <td>${article.extra_disLikePoint * -1}</td>
+          </tr>
+          <tr>
             <th>작성날짜</th>
-            <td>${article.regDate.substring(2, 16)}</td>
+            <td>${article.getForPrintRegDate()}</td>
           </tr>
           <tr>
             <th>수정날짜</th>
-            <td>${article.updateDate.substring(2, 16)}</td>
+            <td>${article.getForPrintUpdateDate()}</td>
           </tr>
           <tr>
             <th>작성자</th>
-            <td>${article.writerName}</td>
+            <td>${article.extra_writerName}</td>
           </tr>
           <tr>
             <th>제목</th>
