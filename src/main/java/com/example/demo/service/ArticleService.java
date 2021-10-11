@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.ArticleRepository;
 import com.example.demo.vo.Article;
+import com.example.demo.vo.Liketable;
 import com.example.demo.vo.ResultData;
 
 @Service
@@ -68,4 +69,23 @@ public class ArticleService {
 		articleRepository.increaseHit(id);
 		
 	}
+
+	public void doLike(int nowLoginedMemberId, int articleId, int likeVal) {
+		
+		articleRepository.doLike(nowLoginedMemberId, articleId, likeVal);
+		
+	}
+
+	public int getLikeCountByMemberId(int nowLoginedMemberId) {
+		return articleRepository.getLikeCountByMemberId(nowLoginedMemberId);
+	}
+
+	public Liketable getLiketableByMemberId(int nowLoginedMemberId, int articleId) {
+		return articleRepository.getLiketableByMemberId(nowLoginedMemberId, articleId);
+	}
+
+	public void modifyLike(int nowLoginedMemberId, int articleId, int likeVal) {
+		articleRepository.modifyLike(nowLoginedMemberId, articleId, likeVal);
+	}
+
 }

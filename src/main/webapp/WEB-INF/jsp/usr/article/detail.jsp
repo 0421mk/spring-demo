@@ -21,12 +21,14 @@
             <td class="article_detail_count">${article.hitCount}</td>
           </tr>
           <tr>
-          <tr>
-            <th>좋아요</th>
+          <tr class="likeWrap">
+            <th><button class="btn btn-xs btn-primary"
+                id="like-btn" value="1">좋아요</button></th>
             <td>${article.extra_likePoint}</td>
           </tr>
-          <tr>
-            <th>싫어요</th>
+          <tr class="likeWrap">
+            <th><button class="btn btn-xs btn-danger"
+                id="dislike-btn" value="-1">싫어요</button></th>
             <td>${article.extra_disLikePoint * -1}</td>
           </tr>
           <tr>
@@ -63,5 +65,44 @@
     </div>
   </div>
 </section>
+
+<script>
+	$('.likeWrap button').click(function() {
+		var val = $(this).val();
+
+		var likeData = {
+			value : val,
+			articleId : ${article.id}
+		};
+
+		$.ajax({
+			type : "POST",
+			url : "../article/doLike",
+			contentType : "application/json;charset=UTF-8",
+			data : JSON.stringify(likeData),
+			success : function(result) {
+				if (result == 0) {
+					alert("로그인 후 이용해주세요.");
+					return false;
+				} else if (result == 1) {
+					alert("이미 추천하였습니다.");
+					return false;
+				} else if (result == 2) {
+					alert("이미 비추천하였습니다.");
+					return false;
+				} else if (result == 3) {
+					alert("수정 완료");
+					return false;
+				} else if (result == 4){
+					<!-- if likeVal == 1 이라면 likVal 값 수정 -->
+					alert("성공");
+				}
+			},
+			error : function(jqXHR, status, error) {
+				alert("알수 없는 에러 [ " + error + " ]");
+			}
+		});
+	});
+</script>
 
 <%@ include file="../common/foot.jspf"%>

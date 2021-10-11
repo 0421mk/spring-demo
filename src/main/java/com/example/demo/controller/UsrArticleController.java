@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +17,7 @@ import com.example.demo.service.BoardService;
 import com.example.demo.util.Util;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
+import com.example.demo.vo.Liketable;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
@@ -168,6 +171,41 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 
+	@RequestMapping("/usr/article/doLike")
+	@ResponseBody
+	private String doLike(@RequestBody Map<String, String> likeData) {
+		
+		int nowLoginedMemberId = rq.getLoginedMemberId();
+
+		if(nowLoginedMemberId == 0) {
+			return "0";
+		}
+		
+		int likeVal = Integer.parseInt(likeData.get("value"));
+		int articleId = Integer.parseInt(likeData.get("articleId"));
+				
+		Liketable liketable = articleService.getLiketableByMemberId(nowLoginedMemberId, articleId);
+		
+		// 유저가 각각 게시물(articleId)에 추천을 했을 경우 liketable이 null 이 아님
+		if(liketable != null && liketable.getPoint() == likeVal) {
+			if(likeVal == 1) {
+				return "1";
+			} else if(likeVal == -1) {
+				return "2";
+			}
+		}
+
+		if(liketable != null && liketable.getPoint() != likeVal) {
+			articleService.modifyLike(nowLoginedMemberId, articleId, likeVal);
+			// Gson으로 JSON RESPONSE 하고 제이쿼리로 텍스트 기입 적용
+			return "3";
+		}
+		
+		articleService.doLike(nowLoginedMemberId, articleId, likeVal);
+		
+		return "4";
+	}
+	
 	@RequestMapping("/usr/article/detail")
 	private String showDetail(Model model, int id) {
 		articleService.increaseHit(id);
