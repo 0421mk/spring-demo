@@ -23,13 +23,13 @@
           <tr>
           <tr class="likeWrap">
             <th><button class="btn btn-xs btn-primary"
-                id="like-btn" value="1">좋아요</button></th>
-            <td>${article.extra_likePoint}</td>
+                value="1">좋아요</button></th>
+            <td id="like-value">${article.extra_likePoint}</td>
           </tr>
           <tr class="likeWrap">
             <th><button class="btn btn-xs btn-danger"
-                id="dislike-btn" value="-1">싫어요</button></th>
-            <td>${article.extra_disLikePoint * -1}</td>
+                value="-1">싫어요</button></th>
+            <td id="dislike-value">${article.extra_disLikePoint * -1}</td>
           </tr>
           <tr>
             <th>작성날짜</th>
@@ -81,21 +81,24 @@
 			contentType : "application/json;charset=UTF-8",
 			data : JSON.stringify(likeData),
 			success : function(result) {
-				if (result == 0) {
+				var jsonResult = JSON.parse(result);
+
+				if (jsonResult.type == 0) {
 					alert("로그인 후 이용해주세요.");
 					return false;
-				} else if (result == 1) {
+				} else if (jsonResult.type == 1) {
 					alert("이미 추천하였습니다.");
 					return false;
-				} else if (result == 2) {
+				} else if (jsonResult.type == 2) {
 					alert("이미 비추천하였습니다.");
 					return false;
-				} else if (result == 3) {
-					alert("수정 완료");
+				} else if (jsonResult.type == 3) {
+					$('#like-value').text(jsonResult.likePoint);
+					$('#dislike-value').text(jsonResult.disLikePoint*-1);
 					return false;
-				} else if (result == 4){
-					<!-- if likeVal == 1 이라면 likVal 값 수정 -->
-					alert("성공");
+				} else if (jsonResult.type == 4){
+					$('#like-value').text(jsonResult.likePoint);
+					$('#dislike-value').text(jsonResult.disLikePoint*-1);
 				}
 			},
 			error : function(jqXHR, status, error) {

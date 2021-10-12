@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.repository.ArticleRepository">
+
+	<select id="getLikeValue" resultType="int">
+		SELECT *, COUNT(`point`) AS
+		pointCnt
+		FROM liketable
+		WHERE relId = #{articleId} AND `point` = #{likeType}
+		GROUP BY relId
+	</select>
+
 	<insert id="doLike">
 		INSERT INTO liketable
 		SET memberId =
@@ -25,7 +34,8 @@
 		FROM
 		liketable
 		WHERE memberId = #{nowLoginedMemberId}
-		AND relId = #{articleId};
+		AND relId =
+		#{articleId};
 	</select>
 
 	<update id="modifyLike">

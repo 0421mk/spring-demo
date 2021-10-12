@@ -43,4 +43,6 @@ public interface ArticleRepository {
 	public Liketable getLiketableByMemberId(int nowLoginedMemberId, int articleId);
 
 	public void modifyLike(int nowLoginedMemberId, int articleId, int likeVal);
+
+	public int getLikeValue(int articleId, int likeType);
 }

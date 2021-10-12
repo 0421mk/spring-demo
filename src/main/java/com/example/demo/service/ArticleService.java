@@ -88,4 +88,8 @@ public class ArticleService {
 		articleRepository.modifyLike(nowLoginedMemberId, articleId, likeVal);
 	}
 
+	public int getLikeValue(int articleId, int likeType) {
+		return articleRepository.getLikeValue(articleId, likeType);
+	}
+
 }

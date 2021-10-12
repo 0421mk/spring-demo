@@ -14,4 +14,5 @@ public class Liketable {
 	private int point;
 	private String regDate;
 	private String updateDate;
+	private int extra_pointCnt;
 }

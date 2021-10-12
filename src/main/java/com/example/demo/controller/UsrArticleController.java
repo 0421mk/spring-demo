@@ -21,6 +21,9 @@ import com.example.demo.vo.Liketable;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 @Controller
 public class UsrArticleController {
 	// @Autowired시 생성자에 articleService = new ArticleService(); 안해도됨
@@ -176,9 +179,15 @@ public class UsrArticleController {
 	private String doLike(@RequestBody Map<String, String> likeData) {
 		
 		int nowLoginedMemberId = rq.getLoginedMemberId();
+		
+		Gson gson = new Gson();
+		JsonObject obj = new JsonObject();
 
 		if(nowLoginedMemberId == 0) {
-			return "0";
+			obj.addProperty("type", "0");
+			String json = gson.toJson(obj);
+			
+			return json;
 		}
 		
 		int likeVal = Integer.parseInt(likeData.get("value"));
@@ -188,22 +197,42 @@ public class UsrArticleController {
 		
 		// 유저가 각각 게시물(articleId)에 추천을 했을 경우 liketable이 null 이 아님
 		if(liketable != null && liketable.getPoint() == likeVal) {
+			
 			if(likeVal == 1) {
-				return "1";
+				obj.addProperty("type", "1");
+				String json = gson.toJson(obj);
+				
+				return json;
 			} else if(likeVal == -1) {
-				return "2";
+				obj.addProperty("type", "2");
+				String json = gson.toJson(obj);
+				
+				return json;
 			}
 		}
 
 		if(liketable != null && liketable.getPoint() != likeVal) {
 			articleService.modifyLike(nowLoginedMemberId, articleId, likeVal);
-			// Gson으로 JSON RESPONSE 하고 제이쿼리로 텍스트 기입 적용
-			return "3";
+			Article article = articleService.getArticle(articleId);
+
+			obj.addProperty("type", "3");
+			obj.addProperty("likePoint", article.getExtra_likePoint());
+			obj.addProperty("disLikePoint", article.getExtra_disLikePoint());
+			
+			String json = gson.toJson(obj);
+			
+			return json;
 		}
 		
 		articleService.doLike(nowLoginedMemberId, articleId, likeVal);
+		Article article = articleService.getArticle(articleId);
 		
-		return "4";
+		obj.addProperty("type", "4");
+		obj.addProperty("likePoint", article.getExtra_likePoint());
+		obj.addProperty("disLikePoint", article.getExtra_disLikePoint());
+		String json = gson.toJson(obj);
+		
+		return json;
 	}
 	
 	@RequestMapping("/usr/article/detail")
