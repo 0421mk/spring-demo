@@ -22,13 +22,11 @@
           </tr>
           <tr>
           <tr class="likeWrap">
-            <th><button class="btn btn-xs btn-primary"
-                value="1">좋아요</button></th>
+            <th><button class="btn btn-xs btn-primary" value="1">좋아요</button></th>
             <td id="like-value">${article.extra_likePoint}</td>
           </tr>
           <tr class="likeWrap">
-            <th><button class="btn btn-xs btn-danger"
-                value="-1">싫어요</button></th>
+            <th><button class="btn btn-xs btn-danger" value="-1">싫어요</button></th>
             <td id="dislike-value">${article.extra_disLikePoint * -1}</td>
           </tr>
           <tr>
@@ -63,8 +61,49 @@
         onclick="if (confirm('정말 삭제하시겠습니까?') == false) return false;"
         href="../article/doDelete?id=${article.id}">게시물 삭제</a>
     </div>
+
+
+
+    <section class="mt-5">
+      <div class="container mx-auto px-3">
+        <h1>Comment</h1>
+        <c:if test="${rq.logined}">
+          <form class="table-box-type-1" method="POST"
+            action="../reply/doWrite">
+            <input type="hidden" name="articleId" value="${article.id}" />
+            <table>
+              <colgroup>
+                <col width="200" />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th>작성자</th>
+                  <td>${rq.loginedMember.nickname}</td>
+                </tr>
+                <tr>
+                  <th>내용</th>
+                  <td><textarea rows="10" name="body"
+                      class="w-full"></textarea></td>
+                </tr>
+                <tr>
+                  <th colspan="2"><input type="submit"
+                    value="댓글 작성" class="hover:underline" /></th>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </c:if>
+        <c:if test="${!rq.logined}">
+          <div>
+            로그인 후 이용해주세요.
+            <a href="/user/member/login">로그인 바로가기</a>
+          </div>
+        </c:if>
+      </div>
+    </section>
   </div>
 </section>
+
 
 <script>
 	$('.likeWrap button').click(function() {

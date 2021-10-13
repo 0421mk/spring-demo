@@ -16,18 +16,14 @@
         <tbody>
           <tr>
             <th>작성자</th>
-            <td>
-              ${rq.loginedMember.nickname}
-            </td>
+            <td>${rq.loginedMember.nickname}</td>
           </tr>
           <tr>
             <th>게시판</th>
-            <td>
-              <select name="boardId" id="">
+            <td><select name="boardId" id="">
                 <option value="1">공지사항</option>
                 <option value="2">자유게시판</option>
-              </select>
-            </td>
+            </select></td>
           </tr>
           <tr>
             <th>제목</th>
@@ -45,6 +41,7 @@
           </tr>
         </tbody>
       </table>
+    </form>
   </div>
 
   <div class="btns mt-5">

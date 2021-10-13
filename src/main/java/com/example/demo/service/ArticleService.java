@@ -73,7 +73,6 @@ public class ArticleService {
 	public void doLike(int nowLoginedMemberId, int articleId, int likeVal) {
 		
 		articleRepository.doLike(nowLoginedMemberId, articleId, likeVal);
-		
 	}
 
 	public int getLikeCountByMemberId(int nowLoginedMemberId) {
