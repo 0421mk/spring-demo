@@ -183,16 +183,12 @@ public class UsrArticleController {
 		}
 
 		List<Reply> replies = null;
-		int repliesCount = 0;
 		
+		// 댓글만 가져오기(대댓글 X)
 		replies = replyService.getReplies(id, 1);
 		
-		if(replies != null) {
-			repliesCount = replies.size();
-		}
-		
-		model.addAttribute("repliesCount", repliesCount);
 		model.addAttribute("article", article);
+		model.addAttribute("replies", replies);
 
 		return "usr/article/detail";
 	}

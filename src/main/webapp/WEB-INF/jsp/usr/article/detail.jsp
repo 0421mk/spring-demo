@@ -61,53 +61,85 @@
         onclick="if (confirm('정말 삭제하시겠습니까?') == false) return false;"
         href="../article/doDelete?id=${article.id}">게시물 삭제</a>
     </div>
-
-
-
-    <section class="mt-5">
-      <div class="container mx-auto px-3">
-        <h1>Comment Write</h1>
-        <c:if test="${rq.logined}">
-          <form class="table-box-type-1" method="POST"
-            action="../reply/doWrite"
-            onsubmit="replyWrite_submitForm(this); return false;">
-            <input type="hidden" name="articleId" value="${article.id}" />
-            <input type="hidden" name="replyType" value="1" />
-            <table>
-              <colgroup>
-                <col width="200" />
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th>작성자</th>
-                  <td>${rq.loginedMember.nickname}</td>
-                </tr>
-                <tr>
-                  <th>내용</th>
-                  <td><textarea rows="5" name="body" class="w-full"></textarea></td>
-                </tr>
-                <tr>
-                  <th colspan="2"><input type="submit"
-                    value="댓글 작성"
-                    class="hover:underline btn btn-primary" /></th>
-                </tr>
-              </tbody>
-            </table>
-          </form>
-        </c:if>
-        <c:if test="${!rq.logined}">
-          <div>
-            로그인 후 이용해주세요. <a href="/usr/member/login">로그인 바로가기</a>
-          </div>
-        </c:if>
-      </div>
-    </section>
   </div>
 </section>
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <h1>Comment List(${repliesCount})</h1>
+    <h1>Comment Write</h1>
+    <c:if test="${rq.logined}">
+      <form class="table-box-type-1" method="POST"
+        action="../reply/doWrite"
+        onsubmit="replyWrite_submitForm(this); return false;">
+        <input type="hidden" name="articleId" value="${article.id}" />
+        <input type="hidden" name="replyType" value="1" />
+        <table>
+          <colgroup>
+            <col width="200" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>작성자</th>
+              <td>${rq.loginedMember.nickname}</td>
+            </tr>
+            <tr>
+              <th>내용</th>
+              <td><textarea rows="5" name="body" class="w-full"></textarea></td>
+            </tr>
+            <tr>
+              <th colspan="2"><input type="submit" value="댓글 작성"
+                class="hover:underline btn btn-primary" /></th>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </c:if>
+    <c:if test="${!rq.logined}">
+      <div>
+        로그인 후 이용해주세요. <a href="/usr/member/login">로그인 바로가기</a>
+      </div>
+    </c:if>
+  </div>
+</section>
+
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+    <h1>Comment List(${replies.size()})</h1>
+    <div class="table-box-type-1">
+      <table>
+        <colgroup>
+          <col width="20" />
+          <col width="20" />
+          <col width="80" />
+          <col width="80" />
+          <col width="250" />
+        </colgroup>
+        <c:forEach var="reply" items="${replies}">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>작성날짜</th>
+              <th>수정날짜</th>
+              <th>작성자</th>
+              <th>내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>${reply.id}</td>
+              <td>${reply.getForPrintRegDate()}</td>
+              <td>${reply.getForPrintUpdateDate()}</td>
+              <td>${reply.extra_writerName}</td>
+              <td>${reply.body}</td>
+            </tr>
+          </tbody>
+          <!-- forEach 내부 id가 1번일 때 위에 출력 그리고 대댓글도 출력해야함 -->
+          <!-- articleId = 이번글, replyType = 2에 해당하는 모든 쿼리 가져오기 -->
+          <!-- 만약 위 쿼리가 현재 이번 forEach 내부 id가 1번일 때 reReplyId가 1이면 -->
+          <!-- 다시 CforEch 발동해서 대댓글 모두 출력 -->
+        </c:forEach>
+      </table>
+    </div>
   </div>
 </section>
 
