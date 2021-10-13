@@ -117,7 +117,7 @@ SET boardId =  1;
 
 UPDATE article
 SET boardId =  2
-WHERE id IN (3);`article`
+WHERE id IN (3);
 
 #게시물 개수 늘리기
 INSERT INTO article
@@ -186,5 +186,45 @@ CREATE TABLE reply (
     `body` TEXT NOT NULL
 );
 
+ALTER TABLE reply ADD COLUMN reReplyId INT(10) UNSIGNED NOT NULL AFTER replyType;
+
 #댓글 테스트 데이터 생성
-`article`
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+articleId = 1,
+replyType = 1,
+`body` = "테스트 댓글 1";
+
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+articleId = 1,
+replyType = 1,
+`body` = "테스트 댓글 2";
+
+# 대댓글 인서트 테스트
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+articleId = 1,
+replyType = 1,
+`body` = "테스트 댓글 3",
+reReplyId = CASE WHEN replyType = 2 THEN reply.id ELSE 0 END
+(대댓글일 경우 reReplyId는 해당 댓글의 id)
+
+# 댓글 셀렉트 테스트
+SELECT A.*, B.nickname AS extra_writerName
+FROM reply AS A
+INNER JOIN `member` AS B
+ON A.memberID = B.id
+WHERE articleId = 1
+AND replyType = 1
+ORDER BY A.id ASC
+(1일 경우 댓글, 2일 경우 대댓글)
+
+# 느려지는 것 방지, articleId로 검색되는 댓글 테이블에 인덱스 걸기
+ALTER TABLE `reply` ADD INDEX (articleId);
