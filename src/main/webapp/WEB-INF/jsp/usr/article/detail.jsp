@@ -66,10 +66,11 @@
 
     <section class="mt-5">
       <div class="container mx-auto px-3">
-        <h1>Comment</h1>
+        <h1>Comment Write</h1>
         <c:if test="${rq.logined}">
           <form class="table-box-type-1" method="POST"
-            action="../reply/doWrite" onsubmit="replyWrite_submitForm(this); return false;">
+            action="../reply/doWrite"
+            onsubmit="replyWrite_submitForm(this); return false;">
             <input type="hidden" name="articleId" value="${article.id}" />
             <input type="hidden" name="replyType" value="1" />
             <table>
@@ -83,8 +84,7 @@
                 </tr>
                 <tr>
                   <th>내용</th>
-                  <td><textarea rows="5" name="body"
-                      class="w-full"></textarea></td>
+                  <td><textarea rows="5" name="body" class="w-full"></textarea></td>
                 </tr>
                 <tr>
                   <th colspan="2"><input type="submit"
@@ -105,6 +105,11 @@
   </div>
 </section>
 
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+    <h1>Comment List(${repliesCount})</h1>
+  </div>
+</section>
 
 <script>
 	$('.likeWrap button').click(function() {

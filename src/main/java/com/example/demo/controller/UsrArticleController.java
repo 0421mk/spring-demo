@@ -1,22 +1,22 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.ReplyService;
 import com.example.demo.util.Util;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
+import com.example.demo.vo.Reply;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
@@ -26,10 +26,12 @@ public class UsrArticleController {
 	// 서비스나 Dao, Dto만 달아야 한다.
 	private ArticleService articleService;
 	private BoardService boardService;
+	private ReplyService replyService;
 	private Rq rq;
 
-	private UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
+	private UsrArticleController(ArticleService articleService, BoardService boardService, ReplyService replyService, Rq rq) {
 		this.articleService = articleService;
+		this.replyService = replyService;
 		this.boardService = boardService;
 		this.rq = rq;
 	}
@@ -180,6 +182,16 @@ public class UsrArticleController {
 			return rq.historyBackJsOnView("존재하지 않는 게시글입니다.");
 		}
 
+		List<Reply> replies = null;
+		int repliesCount = 0;
+		
+		replies = replyService.getReplies(id, 1);
+		
+		if(replies != null) {
+			repliesCount = replies.size();
+		}
+		
+		model.addAttribute("repliesCount", repliesCount);
 		model.addAttribute("article", article);
 
 		return "usr/article/detail";
