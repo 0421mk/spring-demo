@@ -116,7 +116,7 @@
 
 		$.ajax({
 			type : "POST",
-			url : "../article/doLike",
+			url : "../like/doLike",
 			contentType : "application/json;charset=UTF-8",
 			data : JSON.stringify(likeData),
 			success : function(result) {

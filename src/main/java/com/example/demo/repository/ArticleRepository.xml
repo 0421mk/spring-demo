@@ -3,51 +3,6 @@
 
 <mapper namespace="com.example.demo.repository.ArticleRepository">
 
-	<select id="getLikeValue" resultType="int">
-		SELECT *, COUNT(`point`) AS
-		pointCnt
-		FROM liketable
-		WHERE relId = #{articleId} AND `point` = #{likeType}
-		GROUP BY relId
-	</select>
-
-	<insert id="doLike">
-		INSERT INTO liketable
-		SET memberId =
-		#{nowLoginedMemberId},
-		relId = #{articleId},
-		point = #{likeVal},
-		regDate
-		= NOW(),
-		updateDate = NOW()
-	</insert>
-
-	<select id="getLikeCountByMemberId" resultType="int">
-		SELECT COUNT(*)
-		AS CNT
-		FROM liketable
-		WHERE memberId = #{nowLoginedMemberId};
-	</select>
-
-	<select id="getLiketableByMemberId" resultType="Liketable">
-		SELECT *
-		FROM
-		liketable
-		WHERE memberId = #{nowLoginedMemberId}
-		AND relId =
-		#{articleId};
-	</select>
-
-	<update id="modifyLike">
-		UPDATE liketable
-		<set>
-			point = #{likeVal},
-			updateDate = NOW()
-		</set>
-		WHERE memberId = #{nowLoginedMemberId} AND
-		relId = #{articleId}
-	</update>
-
 	<insert id="writeArticle">
 		INSERT INTO article
 		SET title = #{title},

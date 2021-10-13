@@ -70,25 +70,4 @@ public class ArticleService {
 		
 	}
 
-	public void doLike(int nowLoginedMemberId, int articleId, int likeVal) {
-		
-		articleRepository.doLike(nowLoginedMemberId, articleId, likeVal);
-	}
-
-	public int getLikeCountByMemberId(int nowLoginedMemberId) {
-		return articleRepository.getLikeCountByMemberId(nowLoginedMemberId);
-	}
-
-	public Liketable getLiketableByMemberId(int nowLoginedMemberId, int articleId) {
-		return articleRepository.getLiketableByMemberId(nowLoginedMemberId, articleId);
-	}
-
-	public void modifyLike(int nowLoginedMemberId, int articleId, int likeVal) {
-		articleRepository.modifyLike(nowLoginedMemberId, articleId, likeVal);
-	}
-
-	public int getLikeValue(int articleId, int likeType) {
-		return articleRepository.getLikeValue(articleId, likeType);
-	}
-
 }
