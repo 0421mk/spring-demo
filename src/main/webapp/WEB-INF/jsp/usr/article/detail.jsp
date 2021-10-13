@@ -69,7 +69,7 @@
         <h1>Comment</h1>
         <c:if test="${rq.logined}">
           <form class="table-box-type-1" method="POST"
-            action="../reply/doWrite">
+            action="../reply/doWrite" onsubmit="replyWrite_submitForm(this); return false;">
             <input type="hidden" name="articleId" value="${article.id}" />
             <table>
               <colgroup>
@@ -82,12 +82,13 @@
                 </tr>
                 <tr>
                   <th>내용</th>
-                  <td><textarea rows="10" name="body"
+                  <td><textarea rows="5" name="body"
                       class="w-full"></textarea></td>
                 </tr>
                 <tr>
                   <th colspan="2"><input type="submit"
-                    value="댓글 작성" class="hover:underline" /></th>
+                    value="댓글 작성"
+                    class="hover:underline btn btn-primary" /></th>
                 </tr>
               </tbody>
             </table>
@@ -95,8 +96,7 @@
         </c:if>
         <c:if test="${!rq.logined}">
           <div>
-            로그인 후 이용해주세요.
-            <a href="/user/member/login">로그인 바로가기</a>
+            로그인 후 이용해주세요. <a href="/usr/member/login">로그인 바로가기</a>
           </div>
         </c:if>
       </div>
@@ -146,6 +146,27 @@
 			}
 		});
 	});
+</script>
+
+<script>
+	let replyWrite_submitFormDone = false;
+	
+	function replyWrite_submitForm(form) {
+		// 중복 실행 방지
+		if(replyWrite_submitFormDone) {
+			return;
+		}
+		
+		form.body.value = form.body.value.trim();
+		
+		if(form.body.value.length < 5) {
+			alert('댓글 내용을 5자 이상 입력해주세요.');
+			return;
+		}
+		
+		replyWrite_submitFormDone = true;
+		form.submit();
+	}
 </script>
 
 <%@ include file="../common/foot.jspf"%>
