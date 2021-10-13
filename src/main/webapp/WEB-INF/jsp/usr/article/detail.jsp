@@ -71,6 +71,7 @@
           <form class="table-box-type-1" method="POST"
             action="../reply/doWrite" onsubmit="replyWrite_submitForm(this); return false;">
             <input type="hidden" name="articleId" value="${article.id}" />
+            <input type="hidden" name="replyType" value="1" />
             <table>
               <colgroup>
                 <col width="200" />
