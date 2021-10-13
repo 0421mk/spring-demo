@@ -131,7 +131,7 @@ CONCAT('제목_', RAND()), CONCAT('내용_', RAND()) FROM article;
 ALTER TABLE article
 ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL AFTER `body`;
 
-#좋아요 테이블
+#좋아요 테이블 생성
 CREATE TABLE liketable (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -155,3 +155,36 @@ updateDate = NOW(),
 memberId = 1,
 relId = 1,
 `point` = -1;
+
+#게시물 리스트 뿌려주는 DB
+SELECT *,
+IFNULL(SUM(IF(L.point > 0, L.point, 0)), 0) AS extra_likePoint,
+IFNULL(SUM(IF(L.point < 0, L.point, 0)), 0) AS extra_disLikePoint
+FROM(
+SELECT A.*,
+M.nickname AS extra_writerName
+FROM
+article AS A
+LEFT JOIN MEMBER AS M
+ON
+A.memberId = M.id
+WHERE boardId = 1) AS A
+LEFT JOIN liketable AS L
+ON A.id = L.relId
+GROUP BY A.id
+ORDER BY
+A.id DESC
+
+#댓글 테이블 생성
+CREATE TABLE reply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    articleId INT(10) UNSIGNED NOT NULL COMMENT '어떤 게시물의 댓글인지',
+    replyType SMALLINT(2) NOT NULL COMMENT '(1:댓글, 2:대댓글)',
+    `body` TEXT NOT NULL
+);
+
+#댓글 테스트 데이터 생성
+`article`

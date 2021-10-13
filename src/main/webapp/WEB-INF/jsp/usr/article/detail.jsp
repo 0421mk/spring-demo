@@ -99,6 +99,7 @@
 				} else if (jsonResult.type == 4){
 					$('#like-value').text(jsonResult.likePoint);
 					$('#dislike-value').text(jsonResult.disLikePoint*-1);
+					return false;
 				}
 			},
 			error : function(jqXHR, status, error) {
