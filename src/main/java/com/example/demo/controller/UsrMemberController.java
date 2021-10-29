@@ -35,6 +35,11 @@ public class UsrMemberController {
 	public String showLogin(HttpSession httpSession) {
 		return "usr/member/login";
 	}
+	
+	@RequestMapping("/usr/member/myPage")
+	public String showMyPage() {
+		return "usr/member/myPage";
+	}
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody

@@ -69,8 +69,11 @@
         </li>
         </c:if>
         <c:if test="${rq.isLogined()}">
-        <li>
-          <a href="/usr/member/doLogout" class="h-full flex px-3 items-center hover:underline">
+        <li class="h-full flex px-3 items-center">
+          <a href="/usr/member/myPage" class="mr-4">
+            <span>마이페이지</span>
+          </a>
+          <a href="/usr/member/doLogout">
             <span>로그아웃</span>
           </a>
         </li>
