@@ -11,7 +11,8 @@
 		memberId = #{memberId},
 		boardId = #{boardId},
 		regDate = NOW(),
-		updateDate = NOW()
+		updateDate = NOW(),
+		hitCount = 0
 	</insert>
 
 	<!-- resultType 안적으면 error 뜸 -->

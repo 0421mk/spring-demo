@@ -51,13 +51,14 @@ public class UsrMemberController {
 		if (Util.empty(loginPw)) {
 			return Util.jsHistoryBack("loginPw(을)를 입력해주세요.");
 		}
-
+		
 		Member member = memberService.getMemberByLoginId(loginId);
-		String memberNickname = member.getNickname();
-
+		
 		if (member == null) {
 			return Util.jsHistoryBack("존재하지 않는 아이디입니다.");
 		}
+		
+		String memberNickname = member.getNickname();
 
 		// equals로 처리해야한다.
 		if (member.getLoginPw().equals(loginPw) == false) {

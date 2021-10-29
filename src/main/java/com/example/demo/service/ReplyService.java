@@ -22,4 +22,14 @@ public class ReplyService {
 	public List<Reply> getReplies(int id, int replyType) {
 		return replyRepository.getReplies(id, replyType);
 	}
+
+	public Reply getReplyById(int id) {
+		return replyRepository.getReplyById(id);
+	}
+
+	public void doDelete(int id) {
+		
+		replyRepository.doDelete(id);
+		
+	}
 }

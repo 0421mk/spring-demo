@@ -31,11 +31,24 @@ public interface ReplyRepository {
 			SELECT A.*, B.nickname AS extra_writerName
 			FROM reply AS A
 			INNER JOIN `member` AS B
-			ON A.memberID = B.id
+			ON A.memberId = B.id
 			WHERE A.articleId = #{id}
 			AND A.replyType = #{replyType}
 			ORDER BY A.id ASC
 						""")
 	List<Reply> getReplies(int id, int replyType);
+
+	@Select("""
+			SELECT *
+			FROM reply
+			WHERE id = #{id}
+						""")
+	Reply getReplyById(int id);
+
+	@Delete("""
+			DELETE FROM reply
+			WHERE id = #{id}
+						""")
+	void doDelete(int id);
 
 }

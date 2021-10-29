@@ -72,7 +72,8 @@
         action="../reply/doWrite"
         onsubmit="replyWrite_submitForm(this); return false;">
         <input type="hidden" name="articleId" value="${article.id}" />
-        <input type="hidden" name="replyType" value="1" />
+        <input type="hidden" name="replyType" value=1 />
+        <!-- 문자열과 숫자 명확하게 하자 -->
         <table>
           <colgroup>
             <col width="200" />
@@ -110,26 +111,38 @@
         <colgroup>
           <col width="20" />
           <col width="20" />
-          <col width="80" />
-          <col width="80" />
+          <col width="50" />
+          <col width="50" />
+          <col width="50" />
           <col width="250" />
         </colgroup>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>작성날짜</th>
+            <th>수정날짜</th>
+            <th>작성자</th>
+            <th>비고</th>
+            <th>내용</th>
+          </tr>
+        </thead>
         <c:forEach var="reply" items="${replies}">
-          <thead>
-            <tr>
-              <th>번호</th>
-              <th>작성날짜</th>
-              <th>수정날짜</th>
-              <th>작성자</th>
-              <th>내용</th>
-            </tr>
-          </thead>
           <tbody>
             <tr>
               <td>${reply.id}</td>
               <td>${reply.getForPrintRegDate()}</td>
               <td>${reply.getForPrintUpdateDate()}</td>
               <td>${reply.extra_writerName}</td>
+              <td><c:if
+                  test="${rq.loginedMemberId == reply.memberId}">
+                  <div class="btn-wrap">
+                    <a class="btn btn-xs btn-primary"
+                      href="../reply/modify?id=${reply.id}">수정</a> <a
+                      class="btn btn-xs btn-notice"
+                      onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+                      href="../reply/doDelete?articleId=${article.id}&replyId=${reply.id}">삭제</a>
+                  </div>
+                </c:if></td>
               <td>${reply.body}</td>
             </tr>
           </tbody>
