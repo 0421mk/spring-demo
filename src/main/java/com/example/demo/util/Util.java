@@ -7,7 +7,7 @@ public class Util {
 			return true;
 		}
 
-		String str = (String) obj;
+		String str = (String)obj;
 
 		return str.trim().length() == 0;
 	}

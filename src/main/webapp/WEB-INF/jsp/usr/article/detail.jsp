@@ -140,7 +140,7 @@
                       href="../reply/modify?id=${reply.id}">수정</a> <a
                       class="btn btn-xs btn-notice"
                       onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-                      href="../reply/doDelete?articleId=${article.id}&replyId=${reply.id}">삭제</a>
+                      href="../reply/doDelete?id=${reply.id}">삭제</a>
                   </div>
                 </c:if></td>
               <td>${reply.body}</td>

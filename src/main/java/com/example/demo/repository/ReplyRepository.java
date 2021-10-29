@@ -39,9 +39,11 @@ public interface ReplyRepository {
 	List<Reply> getReplies(int id, int replyType);
 
 	@Select("""
-			SELECT *
-			FROM reply
-			WHERE id = #{id}
+			SELECT R.*, M.name AS extra_writerName
+			FROM reply AS R
+			LEFT JOIN `member` AS M
+			ON R.memberId = M.id
+			WHERE R.id = #{id}
 						""")
 	Reply getReplyById(int id);
 
@@ -50,5 +52,13 @@ public interface ReplyRepository {
 			WHERE id = #{id}
 						""")
 	void doDelete(int id);
+	
+	@Update("""
+			UPDATE reply
+			SET body = #{body},
+			updateDate = NOW()
+			WHERE id = #{id}
+			""")
+	void modifyArticle(int id, String body);
 
 }

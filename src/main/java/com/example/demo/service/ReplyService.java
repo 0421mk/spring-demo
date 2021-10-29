@@ -32,4 +32,10 @@ public class ReplyService {
 		replyRepository.doDelete(id);
 		
 	}
+
+	public void modifyArticle(int id, String body) {
+		
+		replyRepository.modifyArticle(id, body);
+		
+	}
 }
