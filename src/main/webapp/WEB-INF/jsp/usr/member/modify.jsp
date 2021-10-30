@@ -4,53 +4,47 @@
 <c:set var="pageTitle" value="마이페이지" />
 <%@ include file="../common/head.jspf"%>
 
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
-      <form class="table-box-type-1" method="post" action="../member/doModify">
-        <table>
-        <colgroup>
-          <col width="200" />
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>이름</th>
-            <th>
-              ${rq.loginedMember.name}
-            </th>
-          </tr>
-          <tr>
-            <th>별명</th>
-            <th>
-              <input type="text" name="nickname" placeholder="${rq.loginedMember.nickname}" class="w-96" />
-            </th>
-          </tr>
-          <tr>
-            <th>이메일</th>
-            <th>
-              ${rq.loginedMember.email}
-            </th>
-          </tr>
-          <tr>
-            <th>전화번호</th>
-            <th>
-              ${rq.loginedMember.cellphoneNo}
-            </th>
-          </tr>
-          <tr>
-            <th colspan="2">
-              <a href="../member/modifyPw">비밀번호 변경</a>
-            </th>
-          </tr>
-          <tr>
-            <th colspan="2">
-              <input type="submit" value="회원 정보 수정" class="hover:underline" />
-            </th>
-          </tr>
-        </tbody>
-      </table>
-      </form>
-    </div>
+<head>
+<link rel="stylesheet" href="/resource/css/member.css" type="text/css">
+</head>
+
+<section>
+  <div class="member-modify-wrap">
+    <form method="post" action="../member/doModify">
+      <div class="title">회원정보 변경</div>
+      <ul>
+        <li>
+          <div class="left">아이디</div>
+          <div class="right">${rq.loginedMember.loginId}</div>
+        </li>
+        <li>
+          <div class="left">이름</div>
+          <div class="right">${rq.loginedMember.name}</div>
+        </li>
+        <li>
+          <div class="left">닉네임</div>
+          <div class="right">
+            <input type="text" name="nickname"
+              placeholder="${rq.loginedMember.nickname}" class="w-96" />
+          </div>
+        </li>
+        <li>
+          <div class="left">이메일</div>
+          <div class="right">${rq.loginedMember.email}</div>
+        </li>
+        <li>
+          <div class="left">전화번호</div>
+          <div class="right">${rq.loginedMember.email}</div>
+        </li>
+        <li class="submit-wrap">
+          <input type="submit" value="회원정보 변경"/>
+        </li>
+        <li>
+          <button type="button" onclick="history.back();">뒤로가기</button>
+          <a href="../member/modifyPw">비밀번호 변경</a>
+        </li>
+      </ul>
+    </form>
   </div>
 </section>
 

@@ -144,18 +144,25 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	private String showList(@RequestParam(defaultValue = "1") int boardId,
+	private String showList(@RequestParam(defaultValue = "0") int boardId,
 			@RequestParam(defaultValue = "default") String searchKeywordTypeCode,
 			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page,
 			Model model) {
 
-		int itemsInAPage = 10;
-
-		List<Article> articles = articleService.getArticlesListPage(boardId, itemsInAPage, page, searchKeywordTypeCode,
+		int itemsInAPage = 6;
+		List<Article> articles = null;
+		Board board = null;
+		
+		// boardId = 0이면 전체 게시글에 접근
+		// 아니면 각 게시판에 접근
+		
+		articles = articleService.getArticlesListPage(boardId, itemsInAPage, page, searchKeywordTypeCode,
 				searchKeyword);
-		Board board = boardService.getBoardById(boardId);
+		
+		board = boardService.getBoardById(boardId);
 
-		if (board == null) {
+		// boardId 0이면 통과
+		if (board == null && boardId != 0) {
 			return rq.historyBackJsOnView("존재하지 않는 게시판입니다.");
 		}
 

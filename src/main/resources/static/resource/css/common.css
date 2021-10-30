@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'KoPubDotumMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/KoPubDotumMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html {
+	height: 100%;
+}
+
+html>body {
+	font-family: 'KoPubDotumMedium';
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+body>header {
+	float: left;
+	width: 320px;
+	height: 100%;
+	background-image: url("../img/beach.jpg");
+	background-size: cover;
+	background-position: center;
+}
+
+body>header:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.tag-wrap {
+	margin-bottom: 10px;	
+}
+.tag-wrap:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.tag-wrap li {
+	float: right;
+	margin-right: 15px;
+}
+.tag-wrap li a {
+	font-size:14px;
+	color: #666;
+}
+.header-wrap {
+	height: 100%;
+	position: relative;
+}
+
+.header-wrap .main-wrap {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.header-wrap .main-wrap a {
+	color: white;
+	font-size: 40px;
+	text-align: center;
+	font-weight: light;
+}
+
+.header-wrap .user-wrap {
+	position: absolute;
+	bottom : 20px;
+	right: 20px;
+}
+
+.header-wrap .user-wrap li {
+	float: left;
+}
+
+.header-wrap .user-wrap li a {
+	color: white;
+	margin-left: 10px;
+}
+
+.header-wrap .user-wrap:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+body>section {
+	float: left;
+	width: calc(100% - 320px);
+	height:100%;
+	overflow-y: scroll;
+	padding: 60px 40px 0 40px;
+	box-sizing: border-box;
+	position: relative;
+}
+body>section:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+body>section .article-header {
+	width: 100%;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+body>section .article-header li {
+	float: left;
+	margin-right: 24px;
+}
+body>section .article-header li a {
+	font-size: 20px;
+	color: #333;
+}
+body>section .article-header:after {
+	content: "";
+	display: block;
+	clear: both;
+}

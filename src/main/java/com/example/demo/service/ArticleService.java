@@ -68,5 +68,4 @@ public class ArticleService {
 		articleRepository.increaseHit(id);
 		
 	}
-
 }

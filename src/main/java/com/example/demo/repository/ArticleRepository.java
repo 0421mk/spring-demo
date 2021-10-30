@@ -35,5 +35,8 @@ public interface ArticleRepository {
 	public List<Article> getArticlesListPage(int boardId, int limitStart, int limitCnt, String searchKeywordTypeCode, String searchKeyword);
 
 	public void increaseHit(int id);
+
+	public List<Article> getArticlesTotalPage(int limitStart, int limitCnt, String searchKeywordTypeCode,
+			String searchKeyword);
 	
 }

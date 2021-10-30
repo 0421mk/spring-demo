@@ -28,7 +28,7 @@ public class UsrMemberController {
 	public String doLogout() {
 		rq.logout();
 
-		return Util.jsReplace("로그아웃 되었습니다.", "/");
+		return Util.jsReplace("", "/");
 	}
 	
 	@RequestMapping("/usr/member/login")
@@ -133,7 +133,7 @@ public class UsrMemberController {
 		
 		rq.login(member);
 
-		return Util.jsReplace(Util.f("로그인에 성공하였습니다. 환영합니다 %s님!", member.getNickname()), "/");
+		return Util.jsReplace("", "/");
 	}
 	
 	@RequestMapping("/usr/member/join")

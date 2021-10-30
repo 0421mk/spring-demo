@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.util.Util;
 import com.example.demo.vo.Article;
 
 import lombok.Data;
@@ -17,8 +18,9 @@ import lombok.Data;
 public class UsrHomeController {
 
 	@RequestMapping("/usr/home/main")
+	@ResponseBody
 	public String showMain() {
-		return "usr/home/main";
+		return Util.jsReplace("", "/usr/article/list");
 	}
 
 	@RequestMapping("/")

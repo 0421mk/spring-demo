@@ -15,82 +15,35 @@
 <!-- 노말라이즈, 라이브러리까지 한방에 해결 -->
 <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 
-<!-- 데이지 UI -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.2/dist/full.css" rel="stylesheet" type="text/css" />
-
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
 <!-- 사이트 공통 CSS -->
-<link rel="stylesheet" href="/resource/common.css" />
+<link rel="stylesheet" href="/resource/css/common.css" />
 <!-- 사이트 공통 JS -->
-<script src="/resource/common.js" defer="defer"></script>
+<script src="/resource/js/common.js" defer="defer"></script>
 </head>
 <body>
   <header>
-    <div class="h-20 flex container mx-auto">
-      <a href="/" class="flex items-center px-3">
-        <span>로고</span>
-      </a>
-      <div class="flex-grow"></div>
-      <ul class="flex">
-        <li>
-          <a href="/" class="h-full flex px-3 items-center hover:underline">
-            <span>홈</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/article/write" class="h-full flex px-3 items-center hover:underline">
-            <span>글쓰기</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/article/list?boardId=1" class="h-full flex px-3 items-center hover:underline">
-            <span>공지사항</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/article/list?boardId=2" class="h-full flex px-3 items-center hover:underline">
-            <span>자유</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/article/list" class="h-full flex px-3 items-center hover:underline">
-            <span>리스트</span>
-          </a>
-        </li>
+    <div class="header-wrap">
+      <div class="main-wrap">
+        <a href="/"> <span>비전코딩</span>
+        </a>
+      </div>
+      <ul class="user-wrap">
         <c:if test="${!rq.isLogined()}">
-        <li>
-          <a href="/usr/member/login" class="h-full flex px-3 items-center hover:underline">
-            <span>로그인</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/member/join" class="h-full flex px-3 items-center hover:underline">
-            <span>회원가입</span>
-          </a>
-        </li>
+          <li><a href="/usr/member/login"> <span>로그인</span>
+          </a></li>
+          <li><a href="/usr/member/join"> <span>회원가입</span>
+          </a></li>
         </c:if>
         <c:if test="${rq.isLogined()}">
-        <li>
-          <a href="/usr/member/myPage" class="h-full flex px-3 items-center hover:underline">
-            <span>마이페이지</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/member/doLogout" class="h-full flex px-3 items-center hover:underline">
-            <span>로그아웃</span>
-          </a>
-        </li>
+          <li><a href="/usr/member/myPage"> <span>마이페이지</span>
+          </a></li>
+          <li><a href="/usr/member/doLogout"> <span>로그아웃</span>
+          </a></li>
         </c:if>
       </ul>
     </div>
   </header>
-  
-  <section>
-    <div class="container mx-auto px-3">
-      <h1>${pageTitle} 페이지</h1>
-    </div>
-  </section>

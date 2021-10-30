@@ -4,53 +4,39 @@
 <c:set var="pageTitle" value="마이페이지" />
 <%@ include file="../common/head.jspf"%>
 
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
-      <table>
-        <colgroup>
-          <col width="200" />
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>로그인 아이디</th>
-            <th>
-              ${rq.loginedMember.loginId}
-            </th>
-          </tr>
-          <tr>
-            <th>이름</th>
-            <th>
-              ${rq.loginedMember.name}
-            </th>
-          </tr>
-          <tr>
-            <th>별명</th>
-            <th>
-              ${rq.loginedMember.nickname}
-            </th>
-          </tr>
-          <tr>
-            <th>이메일</th>
-            <th>
-              ${rq.loginedMember.email}
-            </th>
-          </tr>
-          <tr>
-            <th>전화번호</th>
-            <th>
-              ${rq.loginedMember.cellphoneNo}
-            </th>
-          </tr>
-          <tr>
-            <th colspan="2">
-              <a href="../member/checkPassword" class="btn btn-primary">회원정보 수정</a>
-              <button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<head>
+<link rel="stylesheet" href="/resource/css/member.css" type="text/css">
+</head>
+
+<section>
+  <div class="mypage-wrap">
+    <div class="title">마이페이지</div>
+    <ul>
+      <li>
+        <div class="left">아이디</div>
+        <div class="right">${rq.loginedMember.loginId}</div>
+      </li>
+      <li>
+        <div class="left">이름</div>
+        <div class="right">${rq.loginedMember.name}</div>
+      </li>
+      <li>
+        <div class="left">닉네임</div>
+        <div class="right">${rq.loginedMember.nickname}</div>
+      </li>
+      <li>
+        <div class="left">이메일</div>
+        <div class="right">${rq.loginedMember.email}</div>
+      </li>
+      <li>
+        <div class="left">전화번호</div>
+        <div class="right">${rq.loginedMember.email}</div>
+      </li>
+      <li>
+        <button type="button" onclick="history.back();">뒤로가기</button> <a
+        href="../member/checkPassword">회원정보 수정</a>
+      </li>
+    </ul>
   </div>
 </section>
 

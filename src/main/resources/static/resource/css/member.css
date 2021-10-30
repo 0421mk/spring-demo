@@ -1,0 +1,256 @@
+.login-wrap {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	min-width:500px;
+}
+.login-wrap form .title {
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+.login-wrap ul {
+	
+}
+.login-wrap ul li input {
+	width:100%;
+	height:70px;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	border:1px solid #ddd;
+	margin-bottom: 5px;
+}
+.login-wrap ul li:nth-child(3) input {
+	cursor: pointer;
+	background-color: #6BACCF;
+	color: #fff;
+	border: 0;
+	margin-top: 30px;
+}
+
+.join-wrap {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	min-width:400px;
+}
+.join-wrap form .title {
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+.join-wrap ul {
+	
+}
+.join-wrap ul li input {
+	width:100%;
+	height:40px;
+	padding: 7px 15px;
+	box-sizing: border-box;
+	border:1px solid #ddd;
+	margin-bottom: 5px;
+}
+.join-wrap ul li:last-child input {
+	cursor: pointer;
+	background-color: #6BACCF;
+	color: #fff;
+	height:60px;
+	border: 0;
+	margin-top: 10px;
+}
+
+.mypage-wrap {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	min-width:500px;
+}
+.mypage-wrap > .title {
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+.mypage-wrap ul li:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.mypage-wrap ul li > div {
+	float: left;
+	text-align: center;
+	border:1px solid #ddd;
+	height:50px;
+	line-height:50px;
+	border-bottom: 0;
+	background-color: #fafafa;
+}
+.mypage-wrap ul li:nth-child(5) > div {
+	border-bottom: 1px solid #ddd;
+}
+.mypage-wrap ul li .left {
+	width: 30%;
+	border-right: 0;
+}
+.mypage-wrap ul li .right {
+	width: 70%;
+}
+.mypage-wrap ul li:last-child {
+	margin-top: 15px;
+}
+.mypage-wrap ul li:last-child:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.mypage-wrap ul li:last-child a {
+	float: right;
+	font-size:14px;
+	color:#666;
+	margin-right: 10px;
+}
+.mypage-wrap ul li:last-child button {
+	float: right;
+	font-size:14px;
+	color:#666;
+}
+
+.checkPw-wrap {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	min-width:500px;
+}
+.checkPw-wrap form .title {
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+.checkPw-wrap ul {
+	
+}
+.checkPw-wrap ul li input {
+	width:100%;
+	height:70px;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	border:1px solid #ddd;
+	margin-bottom: 5px;
+}
+.checkPw-wrap ul li:last-child input {
+	cursor: pointer;
+	background-color: #6BACCF;
+	color: #fff;
+	border: 0;
+	margin-top: 30px;
+}
+
+.member-modify-wrap {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	min-width:500px;
+}
+.member-modify-wrap > form > .title {
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+.member-modify-wrap ul li:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.member-modify-wrap ul li > div {
+	float: left;
+	text-align: center;
+	border:1px solid #ddd;
+	height:50px;
+	line-height:50px;
+	border-bottom: 0;
+	background-color: #fafafa;
+}
+.member-modify-wrap ul li:nth-child(5) > div {
+	border-bottom: 1px solid #ddd;
+}
+.member-modify-wrap ul li .left {
+	width: 30%;
+	border-right: 0;
+}
+.member-modify-wrap ul li .right {
+	width: 70%;
+}
+.member-modify-wrap ul li .right input {
+	border:0;
+	width:100%;
+	height:95%;
+}
+.member-modify-wrap ul li:last-child {
+	margin-top: 15px;
+}
+.member-modify-wrap ul li:last-child:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.member-modify-wrap ul li:last-child a {
+	float: right;
+	font-size:14px;
+	color:#666;
+	margin-right: 10px;
+}
+.member-modify-wrap ul li:last-child button {
+	float: right;
+	font-size:14px;
+	color:#666;
+}
+.member-modify-wrap ul .submit-wrap {
+	margin-top: 20px;
+	height:60px;
+	line-height:60px;
+}
+.member-modify-wrap ul .submit-wrap input {
+	cursor: pointer;
+	width: 100%;
+	text-align: center;
+	display:block;
+	background-color: #6BACCF;
+	height:60px;
+	line-height:60px;
+	color: #fff;
+}
+
+.modifyPw-wrap {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	min-width:500px;
+}
+.modifyPw-wrap form .title {
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+.modifyPw-wrap ul {
+	
+}
+.modifyPw-wrap ul li input {
+	width:100%;
+	height:70px;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	border:1px solid #ddd;
+	margin-bottom: 5px;
+}
+.modifyPw-wrap ul li:last-child input {
+	cursor: pointer;
+	background-color: #6BACCF;
+	color: #fff;
+	border: 0;
+	margin-top: 30px;
+}
