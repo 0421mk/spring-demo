@@ -44,4 +44,16 @@ public class MemberService {
 		return memberRepository.getMemberByLoginId(loginId);
 	}
 
+	public void doModify(int id, String nickname) {
+		
+		memberRepository.doModify(id, nickname);
+		
+	}
+
+	public void doModifyPw(int id, String loginPw) {
+		
+		memberRepository.doModifyPw(id, loginPw);
+		
+	}
+
 }

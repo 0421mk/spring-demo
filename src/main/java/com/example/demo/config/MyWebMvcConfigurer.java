@@ -28,6 +28,18 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.excludePathPatterns("/error");
 		
 		registry.addInterceptor(needLoginInterceptor)
+		.addPathPatterns("/usr/member/myPage")
+		.addPathPatterns("/usr/member/checkPassword")
+		.addPathPatterns("/usr/member/doCheckPassword")
+		.addPathPatterns("/usr/member/modify")
+		.addPathPatterns("/usr/member/doModify")
+		.addPathPatterns("/usr/member/modifyPw")
+		.addPathPatterns("/usr/member/doModifyPw")
+		.addPathPatterns("/usr/reply/modify")
+		.addPathPatterns("/usr/reply/doModify")
+		.addPathPatterns("/usr/reply/doDelete")
+		.addPathPatterns("/usr/reply/doWrite")
+		.addPathPatterns("/usr/like/doLike")
 		.addPathPatterns("/usr/article/write")
 		.addPathPatterns("/usr/article/doWrite")
 		.addPathPatterns("/usr/article/modify")

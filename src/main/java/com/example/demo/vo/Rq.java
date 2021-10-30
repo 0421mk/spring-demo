@@ -74,6 +74,21 @@ public class Rq {
 		println("</script>");
 	}
 	
+	public void printJsReplace(String msg, String uri) {
+		resp.setContentType("text/html; charset=UTF-8");
+
+		println("<script>");
+
+		if (!Util.empty(msg)) {
+			println("alert('" + msg + "');");
+		}
+
+		println("location.replace('" + uri + "');");
+
+		println("</script>");
+	}
+
+	
 //	public void printHistoryBackJs(String msg) {
 //		println(Util.jsHistoryBack(msg));
 //	} 이렇게도 사용 가능

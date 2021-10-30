@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.vo.Member;
 
@@ -37,5 +38,19 @@ public interface MemberRepository {
 
 	@Select("SELECT * FROM `member` AS M WHERE M.cellphoneNo = #{cellphoneNo}")
 	public Member getMemberByCellphonNo(@Param("cellphoneNo") String cellphoneNo);
+
+	@Update("""
+			UPDATE `member`
+			SET nickname =  #{nickname}
+			WHERE id = #{id}
+			""")
+	public void doModify(int id, String nickname);
+	
+	@Update("""
+			UPDATE `member`
+			SET loginPw =  #{loginPw}
+			WHERE id = #{id}
+			""")
+	public void doModifyPw(int id, String loginPw);
 
 }

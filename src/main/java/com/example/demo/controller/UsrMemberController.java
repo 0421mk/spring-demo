@@ -40,6 +40,67 @@ public class UsrMemberController {
 	public String showMyPage() {
 		return "usr/member/myPage";
 	}
+	
+	@RequestMapping("/usr/member/checkPassword")
+	public String showCheckPassword() {
+		return "usr/member/checkPassword";
+	}
+	
+	@RequestMapping("/usr/member/doCheckPassword")
+	@ResponseBody
+	public String doCheckPassword(String loginPw) {
+		
+		if (Util.empty(loginPw)) {
+			return Util.jsHistoryBack("loginPw(을)를 입력해주세요.");
+		}
+		
+		Member loginedMember = rq.getLoginedMember();
+		if(!loginedMember.getLoginPw().equals(loginPw)) {
+			return Util.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+		}
+		
+		return Util.jsReplace("", "/usr/member/modify");
+	}
+	
+	@RequestMapping("/usr/member/modify")
+	public String showModify() {
+		return "usr/member/modify";
+	}
+	
+	@RequestMapping("/usr/member/doModify")
+	@ResponseBody
+	public String doModify(String nickname) {
+		
+		Member member = rq.getLoginedMember();
+		
+		if (Util.empty(nickname)) {
+			return Util.jsHistoryBack("nickname(을)를 입력해주세요.");
+		}
+		
+		memberService.doModify(member.getId(), nickname);
+		
+		return Util.jsReplace("회원 정보를 수정하였습니다.", "/usr/member/myPage");
+	}
+	
+	@RequestMapping("/usr/member/modifyPw")
+	public String showModifyPw() {
+		return "usr/member/modifyPw";
+	}
+	
+	@RequestMapping("/usr/member/doModifyPw")
+	@ResponseBody
+	public String doModifyPw(String loginPw, String loginPwConfirm) {
+		
+		Member member = rq.getLoginedMember();
+		
+		if (!loginPw.equals(loginPwConfirm)) {
+			return Util.jsHistoryBack("비밀번호 확인이 같지 않습니다.");
+		}
+		
+		memberService.doModifyPw(member.getId(), loginPw);
+		
+		return Util.jsReplace("비밀번호를 변경하였습니다.", "/usr/member/myPage");
+	}
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
