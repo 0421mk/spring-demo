@@ -4,6 +4,80 @@
 <c:set var="pageTitle" value="게시물 상세" />
 <%@ include file="../common/head.jspf"%>
 
+<head>
+<link rel="stylesheet" href="/resource/css/article.css" type="text/css">
+</head>
+
+<section>
+  <div class="article-detail-wrap">
+    <div class="title-wrap">
+      <div class="category">
+        <a href="/usr/article/list?boardId=${article.boardId}">
+          <c:if test="${article.boardId == 1}">
+          공지사항
+        </c:if>
+        <c:if test="${article.boardId == 2}">
+          자유
+        </c:if>
+        </a>
+      </div>
+      <div class="title">${article.title}</div>
+      <div class="info">
+        <ul>
+          <li>${article.extra_writerName}</li>
+          <li>${article.getForPrintRegDate()}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="body-wrap">${article.body}</div>
+    <div class="reply-wrap">
+      <div class="reply-detail-wrap">
+        <div class="title">${replies.size()} Comments</div>
+        <c:forEach var="reply" items="${replies}">
+          <div class="reply">
+            <div class="info">
+              <ul>
+                <li>${reply.extra_writerName}</li>
+                <li>${reply.getForPrintRegDate()}</li>
+              </ul>
+            </div>
+            <div class="body">${reply.body}</div>
+            <c:if test="${rq.loginedMember.id == reply.memberId}">
+              <div class="btn-wrap">
+                <a href="../reply/modify?id=${reply.id}">수정</a> <a
+                  onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+                  href="../reply/doDelete?id=${reply.id}">삭제</a>
+              </div>
+            </c:if>
+          </div>
+        </c:forEach>
+      </div>
+      <div class="reply-write-wrap">
+        <c:if test="${rq.logined}">
+          <form method="POST"
+            action="../reply/doWrite"
+            onsubmit="replyWrite_submitForm(this); return false;">
+            <input type="hidden" name="articleId" value="${article.id}" />
+            <input type="hidden" name="replyType" value=1 />
+            <div class="body-wrap">
+              <textarea rows="5" name="body" placeholder="${rq.loginedMember.nickname}님의 댓글 입력"></textarea>
+            </div>
+            <div class="input-wrap">
+              <input type="submit" value="댓글 작성" />
+            </div>
+          </form>
+        </c:if>
+        <c:if test="${!rq.logined}">
+          <div>
+            로그인 후 댓글 작성이 가능합니다.
+          </div>
+        </c:if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
@@ -31,7 +105,7 @@
           </tr>
           <tr>
             <th>작성날짜</th>
-            <td>${article.getForPrintRegDate()}</td>
+            <td></td>
           </tr>
           <tr>
             <th>수정날짜</th>
@@ -64,6 +138,10 @@
   </div>
 </section>
 
+ 
+<div class="reply-wrap">
+  
+</div>
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <h1>Comment Write</h1>
@@ -73,7 +151,7 @@
         onsubmit="replyWrite_submitForm(this); return false;">
         <input type="hidden" name="articleId" value="${article.id}" />
         <input type="hidden" name="replyType" value=1 />
-        <!-- 문자열과 숫자 명확하게 하자 -->
+
         <table>
           <colgroup>
             <col width="200" />
@@ -126,36 +204,12 @@
             <th>내용</th>
           </tr>
         </thead>
-        <c:forEach var="reply" items="${replies}">
-          <tbody>
-            <tr>
-              <td>${reply.id}</td>
-              <td>${reply.getForPrintRegDate()}</td>
-              <td>${reply.getForPrintUpdateDate()}</td>
-              <td>${reply.extra_writerName}</td>
-              <td><c:if
-                  test="${rq.loginedMemberId == reply.memberId}">
-                  <div class="btn-wrap">
-                    <a class="btn btn-xs btn-primary"
-                      href="../reply/modify?id=${reply.id}">수정</a> <a
-                      class="btn btn-xs btn-notice"
-                      onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-                      href="../reply/doDelete?id=${reply.id}">삭제</a>
-                  </div>
-                </c:if></td>
-              <td>${reply.body}</td>
-            </tr>
-          </tbody>
-          <!-- forEach 내부 id가 1번일 때 위에 출력 그리고 대댓글도 출력해야함 -->
-          <!-- articleId = 이번글, replyType = 2에 해당하는 모든 쿼리 가져오기 -->
-          <!-- 만약 위 쿼리가 현재 이번 forEach 내부 id가 1번일 때 reReplyId가 1이면 -->
-          <!-- 다시 CforEch 발동해서 대댓글 모두 출력 -->
-        </c:forEach>
+        
       </table>
     </div>
   </div>
 </section>
-
+ -->
 <script>
 	$('.likeWrap button').click(function() {
 		var val = $(this).val();
