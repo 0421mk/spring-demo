@@ -4,66 +4,26 @@
 <c:set var="pageTitle" value="게시물 수정" />
 <%@ include file="../common/head.jspf"%>
 
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../article/doModify">
+<head>
+<link rel="stylesheet" href="/resource/css/article.css" type="text/css">
+</head>
+
+<section>
+  <div class="article-write-wrap">
+    <form method="POST" action="../article/doWrite">
       <input type="hidden" name="id" value="${article.id}" />
-      <table>
-        <colgroup>
-          <col width="200" />
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>번호</th>
-            <td>${article.id}</td>
-          </tr>
-          <tr>
-            <th>조회수</th>
-            <td class="article_detail_count">${article.hitCount}</td>
-          </tr>
-          <tr>
-          <tr>
-            <th>추천수</th>
-            <td>${article.extra_likePoint}</td>
-          </tr>
-          <tr>
-            <th>작성날짜</th>
-            <td>${article.getForPrintRegDate()}</td>
-          </tr>
-          <tr>
-            <th>수정날짜</th>
-            <td>${article.getForPrintUpdateDate()}</td>
-          </tr>
-          <tr>
-            <th>작성자</th>
-            <td>${article.extra_writerName}</td>
-          </tr>
-          <tr>
-            <th>제목</th>
-            <td>
-              <input type="text" name="title" class="w-96" value="${article.title}" placeholder="제목" />
-            </td>
-          </tr>
-          <tr>
-            <th>내용</th>
-           <td>
-            <textarea rows="10" name="body" class="w-full">${article.body}</textarea>
-            </td>
-          </tr>
-          <tr>
-            <th colspan="2">
-              <input type="submit" value="수정" class="hover:underline" />
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <div class="btns mt-5">
-      <button class="hover:underline" type="button" onclick="history.back();">뒤로가기</button>
-      <a class="btn-text-link" href="../article/modify?id=${article.id}">게시물 수정</a>
-      <a class="btn-text-link" onclick="if (confirm('정말 삭제하시겠습니까?') == false) return false;" href="../article/doDelete?id=${article.id}">게시물 삭제</a>
-    </div>
+      <ul>
+        <li><c:if test="${article.boardId == 1}">
+          공지사항
+        </c:if> <c:if test="${article.boardId == 2}">
+          자유
+        </c:if></li>
+        <li><input type="text" name="title"
+          value="${article.title}" /></li>
+        <li><textarea rows="10" name="body">${article.body}</textarea></li>
+        <li><input type="submit" value="글 수정하기" /></li>
+      </ul>
+    </form>
   </div>
 </section>
 
