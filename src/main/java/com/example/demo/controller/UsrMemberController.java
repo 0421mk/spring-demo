@@ -104,7 +104,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw) {
 		
 		if (rq.isLogined()) {
 			return Util.jsHistoryBack("로그아웃 후 이용해주세요.");
@@ -135,10 +135,15 @@ public class UsrMemberController {
 
 		return Util.jsReplace(Util.f("로그인에 성공하였습니다. 환영합니다 %s님!", member.getNickname()), "/");
 	}
+	
+	@RequestMapping("/usr/member/join")
+	public String showJoin() {
+		return "usr/member/join";
+	}
 
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(HttpServletRequest req, String loginId, String loginPw, String name, String nickname, String cellphoneNo,
+	public String doJoin(HttpServletRequest req, String loginId, String loginPw, String loginPwConfirm, String name, String nickname, String cellphoneNo,
 			String email) {
 
 		if (Util.empty(loginId)) {
@@ -147,6 +152,14 @@ public class UsrMemberController {
 
 		if (Util.empty(loginPw)) {
 			return Util.jsHistoryBack("loginPw(을)를 입력해주세요.");
+		}
+		
+		if (Util.empty(loginPwConfirm)) {
+			return Util.jsHistoryBack("loginPwConfirm(을)를 입력해주세요.");
+		}
+		
+		if(!loginPw.equals(loginPwConfirm)) {
+			return Util.jsHistoryBack("비밀번호를 확인해주세요.");
 		}
 
 		if (Util.empty(name)) {

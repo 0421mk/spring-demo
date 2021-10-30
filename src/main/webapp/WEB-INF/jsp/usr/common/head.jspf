@@ -67,13 +67,20 @@
             <span>로그인</span>
           </a>
         </li>
+        <li>
+          <a href="/usr/member/join" class="h-full flex px-3 items-center hover:underline">
+            <span>회원가입</span>
+          </a>
+        </li>
         </c:if>
         <c:if test="${rq.isLogined()}">
-        <li class="h-full flex px-3 items-center">
-          <a href="/usr/member/myPage" class="mr-4">
+        <li>
+          <a href="/usr/member/myPage" class="h-full flex px-3 items-center hover:underline">
             <span>마이페이지</span>
           </a>
-          <a href="/usr/member/doLogout">
+        </li>
+        <li>
+          <a href="/usr/member/doLogout" class="h-full flex px-3 items-center hover:underline">
             <span>로그아웃</span>
           </a>
         </li>
