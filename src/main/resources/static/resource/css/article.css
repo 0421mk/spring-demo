@@ -142,7 +142,7 @@
 .article-detail-wrap .title-wrap .title {
 	font-size: 34px;
 	line-height: 44px;
-	height: 88px;
+	max-height: 88px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
@@ -197,6 +197,22 @@
 
 .article-detail-wrap>.body-wrap {
 	min-height: 240px;
+}
+
+.article-detail-wrap>.like-wrap {
+	text-align: center;
+	margin-bottom: 20px;
+}
+.article-detail-wrap>.like-wrap .like {
+	display: inline-block;
+}
+.article-detail-wrap>.like-wrap .like button {
+	background-color: #6BACCF;
+	color: #fff;
+	width:60px;
+	height:40px;
+	border-radius:20px;
+	display: inline-block;
 }
 
 .article-detail-wrap .reply-wrap {

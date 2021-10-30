@@ -11,6 +11,7 @@ import com.example.demo.service.ArticleService;
 import com.example.demo.service.LikeService;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Liketable;
+import com.example.demo.vo.Member;
 import com.example.demo.vo.Rq;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -31,13 +32,14 @@ public class UsrLikeController {
 	@ResponseBody
 	private String doLike(@RequestBody Map<String, String> likeData) {
 
-		int nowLoginedMemberId = rq.getLoginedMemberId();
+		Member member = rq.getLoginedMember();
+		int nowLoginedMemberId = member.getId();
 
 		Gson gson = new Gson();
 		JsonObject obj = new JsonObject();
-
-		if (nowLoginedMemberId == 0) {
-			obj.addProperty("type", "0");
+		
+		if(nowLoginedMemberId == 0) {
+			obj.addProperty("type", 0);
 			String json = gson.toJson(obj);
 
 			return json;
@@ -52,12 +54,12 @@ public class UsrLikeController {
 		if (liketable != null && liketable.getPoint() == likeVal) {
 
 			if (likeVal == 1) {
-				obj.addProperty("type", "1");
+				obj.addProperty("type", 1);
 				String json = gson.toJson(obj);
 
 				return json;
 			} else if (likeVal == -1) {
-				obj.addProperty("type", "2");
+				obj.addProperty("type", 2);
 				String json = gson.toJson(obj);
 
 				return json;
@@ -68,7 +70,7 @@ public class UsrLikeController {
 			likeService.modifyLike(nowLoginedMemberId, articleId, likeVal);
 			Article article = articleService.getArticle(articleId);
 
-			obj.addProperty("type", "3");
+			obj.addProperty("type", 3);
 			obj.addProperty("likePoint", article.getExtra_likePoint());
 			obj.addProperty("disLikePoint", article.getExtra_disLikePoint());
 
@@ -80,7 +82,7 @@ public class UsrLikeController {
 		likeService.doLike(nowLoginedMemberId, articleId, likeVal);
 		Article article = articleService.getArticle(articleId);
 
-		obj.addProperty("type", "4");
+		obj.addProperty("type", 4);
 		obj.addProperty("likePoint", article.getExtra_likePoint());
 		obj.addProperty("disLikePoint", article.getExtra_disLikePoint());
 		String json = gson.toJson(obj);

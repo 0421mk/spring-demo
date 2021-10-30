@@ -25,6 +25,7 @@
         <ul>
           <li>${article.extra_writerName}</li>
           <li>${article.getForPrintRegDate()}</li>
+          <li>조회수 : ${article.hitCount}</li>
         </ul>
         <c:if test="${rq.loginedMember.id == article.memberId}">
           <div class="btn-wrap">
@@ -36,6 +37,13 @@
       </div>
     </div>
     <div class="body-wrap">${article.body}</div>
+    <div class="like-wrap">
+      <div class="like">
+        <button value="1">
+          <i class="far fa-thumbs-up"></i> <span id="like-value">${article.extra_likePoint}</span>
+        </button>
+      </div>
+    </div>
     <div class="reply-wrap">
       <div class="reply-detail-wrap">
         <div class="title">${replies.size()} Comments</div>
@@ -82,7 +90,7 @@
 </section>
 
 <script>
-	$('.likeWrap button').click(function() {
+	$('.article-detail-wrap .like-wrap button').click(function() {
 		var val = $(this).val();
 
 		var likeData = {
@@ -97,6 +105,8 @@
 			data : JSON.stringify(likeData),
 			success : function(result) {
 				var jsonResult = JSON.parse(result);
+				
+				console.log(jsonResult);
 
 				if (jsonResult.type == 0) {
 					alert("로그인 후 이용해주세요.");
